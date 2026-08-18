@@ -1,47 +1,51 @@
 import "./index.css";
 import { Composition } from "remotion";
-import { HelloWorld, myCompSchema } from "./HelloWorld";
-import { Logo, myCompSchema2 } from "./HelloWorld/Logo";
+import { Ad } from "./Ad/Ad";
+import { captions } from "./Ad/captions";
+import { calculateAdMetadata, FPS } from "./Ad/metadata";
+import { adSchema } from "./Ad/schema";
 
-// Each <Composition> is an entry in the sidebar!
-
+/**
+ * Cada <Composition> es una entrada del menú lateral de Remotion Studio.
+ *
+ * El tamaño y la duración los resuelve `calculateAdMetadata` leyendo el video
+ * de entrada, así que los valores de acá abajo son solo el punto de partida
+ * mientras el archivo todavía no se lee.
+ */
 export const RemotionRoot: React.FC = () => {
   return (
-    <>
-      <Composition
-        // You can take the "id" to render a video:
-        // npx remotion render HelloWorld
-        id="HelloWorld"
-        component={HelloWorld}
-        durationInFrames={150}
-        fps={30}
-        width={1920}
-        height={1080}
-        // You can override these props for each render:
-        // https://www.remotion.dev/docs/parametrized-rendering
-        schema={myCompSchema}
-        defaultProps={{
-          titleText: "Welcome to Remotion",
-          titleColor: "#000000",
-          logoColor1: "#91EAE4",
-          logoColor2: "#86A8E7",
-        }}
-      />
-
-      {/* Mount any React component to make it show up in the sidebar and work on it individually! */}
-      <Composition
-        id="OnlyLogo"
-        component={Logo}
-        durationInFrames={150}
-        fps={30}
-        width={1920}
-        height={1080}
-        schema={myCompSchema2}
-        defaultProps={{
-          logoColor1: "#91dAE2" as const,
-          logoColor2: "#86A8E7" as const,
-        }}
-      />
-    </>
+    <Composition
+      // Para renderizar: npx remotion render Ad out/ad.mp4
+      id="Ad"
+      component={Ad}
+      schema={adSchema}
+      calculateMetadata={calculateAdMetadata}
+      fps={FPS}
+      width={1080}
+      height={1920}
+      durationInFrames={FPS * 10}
+      defaultProps={{
+        videoSrc: "video.mp4",
+        format: "9:16" as const,
+        trimStartInSeconds: 0,
+        trimEndInSeconds: null,
+        hook: {
+          text: "Guacamole listo en 10 segundos",
+          durationInSeconds: 2.2,
+        },
+        captions,
+        watermark: {
+          text: "Palta Molita",
+          logoSrc: null,
+        },
+        outro: {
+          headline: "Palta Molita",
+          cta: "Pídelo ahora",
+          backgroundColor: "#0B0B0F",
+          durationInSeconds: 2.5,
+        },
+        accentColor: "#8FD14F",
+      }}
+    />
   );
 };
