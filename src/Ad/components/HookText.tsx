@@ -6,6 +6,7 @@ import {
   useVideoConfig,
 } from "remotion";
 import { FONT_FAMILY, readableOnVideo } from "../theme";
+import { SAFE_ZONE_TOP } from "./SafeZones";
 
 /**
  * El gancho: la frase grande de los primeros segundos, que es lo que decide
@@ -16,7 +17,7 @@ export const HookText: React.FC<{
   accentColor: string;
 }> = ({ text, accentColor }) => {
   const frame = useCurrentFrame();
-  const { fps, width, durationInFrames } = useVideoConfig();
+  const { fps, width, height, durationInFrames } = useVideoConfig();
 
   const entrance = spring({ frame, fps, config: { damping: 200 } });
   const translateY = interpolate(entrance, [0, 1], [-width * 0.08, 0]);
@@ -34,9 +35,9 @@ export const HookText: React.FC<{
       style={{
         justifyContent: "flex-start",
         alignItems: "center",
-        paddingTop: "14%",
-        paddingLeft: "7%",
-        paddingRight: "7%",
+        paddingTop: height * (SAFE_ZONE_TOP + 0.03),
+        paddingLeft: width * 0.07,
+        paddingRight: width * 0.07,
         opacity,
       }}
     >

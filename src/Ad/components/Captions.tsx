@@ -7,6 +7,7 @@ import {
   useVideoConfig,
 } from "remotion";
 import type { Caption } from "../schema";
+import { SAFE_ZONE_BOTTOM } from "./SafeZones";
 import { FONT_FAMILY, readableOnVideo } from "../theme";
 
 const CaptionLine: React.FC<{ text: string; accentColor: string }> = ({
@@ -14,7 +15,7 @@ const CaptionLine: React.FC<{ text: string; accentColor: string }> = ({
   accentColor,
 }) => {
   const frame = useCurrentFrame();
-  const { fps, width } = useVideoConfig();
+  const { fps, width, height } = useVideoConfig();
 
   // Un pop corto al entrar: llama la atención sin marear.
   const entrance = spring({ frame, fps, config: { damping: 200 }, durationInFrames: 8 });
@@ -25,9 +26,11 @@ const CaptionLine: React.FC<{ text: string; accentColor: string }> = ({
       style={{
         justifyContent: "flex-end",
         alignItems: "center",
-        paddingBottom: "24%",
-        paddingLeft: "8%",
-        paddingRight: "8%",
+        // En px sobre la altura: un padding en % se calcularía sobre el ancho
+        // y dejaría el texto dentro de la banda inferior de Meta.
+        paddingBottom: height * (SAFE_ZONE_BOTTOM + 0.02),
+        paddingLeft: width * 0.08,
+        paddingRight: width * 0.08,
       }}
     >
       <div

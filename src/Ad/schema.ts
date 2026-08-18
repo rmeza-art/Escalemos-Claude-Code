@@ -49,6 +49,11 @@ export const adSchema = z.object({
     .nullable(),
   /** Color de marca. Se usa en el gancho, los subtítulos y el botón del cierre. */
   accentColor: zColor(),
+  /**
+   * Dibuja encima las zonas de seguridad de Meta para revisar que ningún
+   * texto quede bajo el copy o los botones del feed. Se apaga para exportar.
+   */
+  showSafeZones: z.boolean(),
 });
 
 export type Caption = z.infer<typeof captionSchema>;

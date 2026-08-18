@@ -28,8 +28,9 @@ export const RemotionRoot: React.FC = () => {
         videoSrc: "video.mp4",
         format: "9:16" as const,
         trimStartInSeconds: 0,
-        // El archivo de WhatsApp trae ~0,4 s de negro al final: se recorta.
-        trimEndInSeconds: 17.3,
+        // A los 13,5 s entra en cuadro un pendón de otra marca (y el archivo
+        // de WhatsApp cierra con ~0,4 s de negro): se corta antes de ambos.
+        trimEndInSeconds: 13.2,
         hook: {
           text: "Abre y disfruta",
           durationInSeconds: 2.2,
@@ -40,6 +41,7 @@ export const RemotionRoot: React.FC = () => {
         watermark: null,
         outro: null,
         accentColor: "#8FD14F",
+        showSafeZones: false,
       }}
     />
   );

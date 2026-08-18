@@ -9,6 +9,7 @@ import { Captions } from "./components/Captions";
 import { HookText } from "./components/HookText";
 import { MissingVideo } from "./components/MissingVideo";
 import { OutroCard } from "./components/OutroCard";
+import { SafeZones } from "./components/SafeZones";
 import { Watermark } from "./components/Watermark";
 import type { AdProps } from "./schema";
 
@@ -21,6 +22,7 @@ export const Ad: React.FC<AdProps> = ({
   watermark,
   outro,
   accentColor,
+  showSafeZones,
 }) => {
   const { fps, durationInFrames } = useVideoConfig();
 
@@ -76,6 +78,8 @@ export const Ad: React.FC<AdProps> = ({
           />
         </Sequence>
       )}
+
+      {showSafeZones ? <SafeZones /> : null}
     </AbsoluteFill>
   );
 };
