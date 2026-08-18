@@ -25,7 +25,7 @@ const CaptionLine: React.FC<{ text: string; accentColor: string }> = ({
       style={{
         justifyContent: "flex-end",
         alignItems: "center",
-        paddingBottom: "16%",
+        paddingBottom: "24%",
         paddingLeft: "8%",
         paddingRight: "8%",
       }}

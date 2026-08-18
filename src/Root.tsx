@@ -28,22 +28,17 @@ export const RemotionRoot: React.FC = () => {
         videoSrc: "video.mp4",
         format: "9:16" as const,
         trimStartInSeconds: 0,
-        trimEndInSeconds: null,
+        // El archivo de WhatsApp trae ~0,4 s de negro al final: se recorta.
+        trimEndInSeconds: 17.3,
         hook: {
-          text: "Guacamole listo en 10 segundos",
+          text: "Abre y disfruta",
           durationInSeconds: 2.2,
         },
         captions,
-        watermark: {
-          text: "Palta Molita",
-          logoSrc: null,
-        },
-        outro: {
-          headline: "Palta Molita",
-          cta: "Pídelo ahora",
-          backgroundColor: "#0B0B0F",
-          durationInSeconds: 2.5,
-        },
+        // La marca de agua y el cierre siguen disponibles como capas: para
+        // activarlos basta con reemplazar estos `null` por sus objetos.
+        watermark: null,
+        outro: null,
         accentColor: "#8FD14F",
       }}
     />

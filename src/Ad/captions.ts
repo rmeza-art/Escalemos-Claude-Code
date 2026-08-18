@@ -13,5 +13,5 @@ export const captions: Caption[] = [
   { text: "Lo abres y ya está", startMs: 5600, endMs: 8600 },
   { text: "Rinde para toda la tabla", startMs: 8800, endMs: 11800 },
   { text: "Para juntarse sin cocinar", startMs: 12000, endMs: 15000 },
-  { text: "Guacamole de verdad", startMs: 15200, endMs: 17700 },
+  { text: "Guacamole de verdad", startMs: 15200, endMs: 17300 },
 ];
