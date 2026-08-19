@@ -46,7 +46,7 @@ export type Beat = {
   endCard: boolean;
 };
 
-const BODEGON_VERDE = "fotos/04-bodegon-verde.jpg";
+const BODEGON_VERDE = "fotos/09-bodegon-verde.jpg";
 
 export const beats: Beat[] = [
   {
@@ -62,11 +62,11 @@ export const beats: Beat[] = [
     endCard: false,
   },
   {
-    label: "Mechón frente al espejo",
-    photo: "fotos/03-mechon.jpg",
+    label: "Shampoo en la mano, frente al espejo",
+    photo: "fotos/02-shampoo-en-mano.jpg",
     durationInSeconds: 2.6,
-    from: { scale: 1.18, x: 0.02, y: 0 },
-    to: { scale: 1.05, x: 0, y: 0 },
+    from: { scale: 1.16, x: 0.02, y: 0 },
+    to: { scale: 1.04, x: 0, y: 0 },
     text: "Pensé que era el shampoo.",
     step: null,
     note: null,
@@ -74,11 +74,11 @@ export const beats: Beat[] = [
     endCard: false,
   },
   {
-    label: "Aplicando el spray",
-    photo: "fotos/06-spray.jpg",
+    label: "Spray con el pelo mojado",
+    photo: "fotos/03-spray-pelo-mojado.jpg",
     durationInSeconds: 3,
-    from: { scale: 1.05, x: 0, y: 0.02 },
-    to: { scale: 1.2, x: -0.03, y: -0.02 },
+    from: { scale: 1.04, x: 0, y: 0.02 },
+    to: { scale: 1.2, x: -0.02, y: -0.02 },
     text: "Pero el cuidado no termina en la ducha.",
     step: null,
     note: null,
@@ -86,10 +86,10 @@ export const beats: Beat[] = [
     endCard: false,
   },
   {
-    label: "Los tres productos",
-    photo: BODEGON_VERDE,
+    label: "Los tres en el lavamanos",
+    photo: "fotos/04-tres-en-lavamanos.jpg",
     durationInSeconds: 3.2,
-    from: { scale: 1.22, x: 0, y: 0.02 },
+    from: { scale: 1.2, x: 0, y: 0.03 },
     to: { scale: 1.04, x: 0, y: 0 },
     text: "Cambié un producto por una rutina de tres pasos.",
     step: null,
@@ -97,47 +97,47 @@ export const beats: Beat[] = [
     focus: null,
     endCard: false,
   },
-  // Los tres pasos se quedan en la misma foto y el foco se corre de frasco en
-  // frasco: la rutina se cuenta con la imagen, no con un rótulo.
+  // Cada paso tiene su propio gesto: dosificar, desenredar, rociar. La rutina
+  // se ve, no se rotula.
   {
-    label: "Foco en el shampoo",
-    photo: BODEGON_VERDE,
+    label: "Dosificando el shampoo",
+    photo: "fotos/05-dosificando-shampoo.jpg",
     durationInSeconds: 2.4,
-    from: { scale: 1.04, x: 0, y: 0 },
-    to: { scale: 1.1, x: 0.02, y: 0 },
+    from: { scale: 1.05, x: 0, y: 0 },
+    to: { scale: 1.16, x: 0.02, y: -0.01 },
     text: "Shampoo",
     step: 1,
     note: "Limpia",
-    focus: { x: 0.3, y: 0.62, radius: 0.3 },
+    focus: null,
     endCard: false,
   },
   {
-    label: "Foco en el acondicionador",
-    photo: BODEGON_VERDE,
+    label: "Desenredando con acondicionador",
+    photo: "fotos/06-desenredando.jpg",
     durationInSeconds: 2.6,
-    from: { scale: 1.1, x: 0.02, y: 0 },
-    to: { scale: 1.1, x: -0.01, y: 0 },
+    from: { scale: 1.05, x: 0, y: 0 },
+    to: { scale: 1.17, x: -0.02, y: -0.01 },
     text: "Acondicionador",
     step: 2,
     note: "Suaviza y desenreda",
-    focus: { x: 0.55, y: 0.62, radius: 0.3 },
+    focus: null,
     endCard: false,
   },
   {
-    label: "Foco en el fortalecedor",
-    photo: BODEGON_VERDE,
+    label: "Fortalecedor en spray",
+    photo: "fotos/07-spray-bata.jpg",
     durationInSeconds: 2.8,
-    from: { scale: 1.1, x: -0.01, y: 0 },
-    to: { scale: 1.16, x: -0.04, y: 0 },
+    from: { scale: 1.05, x: 0, y: 0 },
+    to: { scale: 1.18, x: 0.01, y: -0.02 },
     text: "Fortalecedor en spray",
     step: 3,
     note: "Cuidado diario",
-    focus: { x: 0.75, y: 0.6, radius: 0.26 },
+    focus: null,
     endCard: false,
   },
   {
     label: "Espejo, plano abierto",
-    photo: "fotos/02-espejo-abierto.jpg",
+    photo: "fotos/08-espejo-abierto.jpg",
     durationInSeconds: 2.4,
     from: { scale: 1.16, x: 0, y: 0 },
     to: { scale: 1.03, x: 0, y: 0 },
@@ -148,8 +148,8 @@ export const beats: Beat[] = [
     endCard: false,
   },
   {
-    label: "Bodegón claro",
-    photo: "fotos/05-bodegon-claro.jpg",
+    label: "Bodegón verde",
+    photo: BODEGON_VERDE,
     durationInSeconds: 4,
     from: { scale: 1.14, x: 0, y: 0 },
     to: { scale: 1.02, x: 0, y: 0 },
