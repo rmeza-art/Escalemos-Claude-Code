@@ -4,6 +4,9 @@ import { Ad } from "./Ad/Ad";
 import { captions } from "./Ad/captions";
 import { calculateAdMetadata, FPS } from "./Ad/metadata";
 import { adSchema } from "./Ad/schema";
+import { FPS as EMPORIO_FPS, TOTAL_FRAMES } from "./Emporio/beats";
+import { Emporio } from "./Emporio/Emporio";
+import { emporioSchema } from "./Emporio/schema";
 
 /**
  * Cada <Composition> es una entrada del menú lateral de Remotion Studio.
@@ -14,35 +17,60 @@ import { adSchema } from "./Ad/schema";
  */
 export const RemotionRoot: React.FC = () => {
   return (
-    <Composition
-      // Para renderizar: npx remotion render Ad out/ad.mp4
-      id="Ad"
-      component={Ad}
-      schema={adSchema}
-      calculateMetadata={calculateAdMetadata}
-      fps={FPS}
-      width={1080}
-      height={1920}
-      durationInFrames={FPS * 10}
-      defaultProps={{
-        videoSrc: "video.mp4",
-        format: "9:16" as const,
-        trimStartInSeconds: 0,
-        // A los 13,5 s entra en cuadro un pendón de otra marca (y el archivo
-        // de WhatsApp cierra con ~0,4 s de negro): se corta antes de ambos.
-        trimEndInSeconds: 13.2,
-        hook: {
-          text: "Abre y disfruta",
-          durationInSeconds: 2.2,
-        },
-        captions,
-        // La marca de agua y el cierre siguen disponibles como capas: para
-        // activarlos basta con reemplazar estos `null` por sus objetos.
-        watermark: null,
-        outro: null,
-        accentColor: "#8FD14F",
-        showSafeZones: false,
-      }}
-    />
+    <>
+      <Composition
+        // Para renderizar: npx remotion render Ad out/ad.mp4
+        id="Ad"
+        component={Ad}
+        schema={adSchema}
+        calculateMetadata={calculateAdMetadata}
+        fps={FPS}
+        width={1080}
+        height={1920}
+        durationInFrames={FPS * 10}
+        defaultProps={{
+          videoSrc: "video.mp4",
+          format: "9:16" as const,
+          trimStartInSeconds: 0,
+          // A los 13,5 s entra en cuadro un pendón de otra marca (y el archivo
+          // de WhatsApp cierra con ~0,4 s de negro): se corta antes de ambos.
+          trimEndInSeconds: 13.2,
+          hook: {
+            text: "Abre y disfruta",
+            durationInSeconds: 2.2,
+          },
+          captions,
+          // La marca de agua y el cierre siguen disponibles como capas: para
+          // activarlos basta con reemplazar estos `null` por sus objetos.
+          watermark: null,
+          outro: null,
+          accentColor: "#8FD14F",
+          showSafeZones: false,
+        }}
+      />
+
+      {/*
+        Reel de Emporio Orgánika: fotos fijas con movimiento de cámara. Todavía
+        no hay voz en off, así que el texto en pantalla es el que narra y la
+        duración de cada plano sale del tiempo de lectura, no de un audio.
+      */}
+      <Composition
+        // Para renderizar: npx remotion render Emporio out/emporio.mp4
+        id="Emporio"
+        component={Emporio}
+        schema={emporioSchema}
+        fps={EMPORIO_FPS}
+        width={1080}
+        height={1920}
+        durationInFrames={TOTAL_FRAMES}
+        defaultProps={{
+          photosReady: false,
+          price: "$49.990",
+          shipping: "Envío gratis",
+          cta: "Comprar ahora",
+          showSafeZones: false,
+        }}
+      />
+    </>
   );
 };

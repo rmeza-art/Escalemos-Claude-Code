@@ -1,5 +1,5 @@
 import { AbsoluteFill, Img, staticFile, useVideoConfig } from "remotion";
-import { FONT_FAMILY } from "../theme";
+import { FONT_FAMILY } from "../../common/theme";
 
 export const Watermark: React.FC<{
   text: string;

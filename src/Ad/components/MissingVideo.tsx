@@ -1,5 +1,5 @@
 import { AbsoluteFill, useVideoConfig } from "remotion";
-import { FONT_FAMILY } from "../theme";
+import { FONT_FAMILY } from "../../common/theme";
 
 /**
  * Se muestra cuando `videoSrc` es `null` o el archivo no se pudo leer, para

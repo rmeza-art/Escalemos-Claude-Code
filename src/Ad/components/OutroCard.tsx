@@ -5,7 +5,7 @@ import {
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
-import { FONT_FAMILY } from "../theme";
+import { FONT_FAMILY } from "../../common/theme";
 
 /** La tarjeta de cierre con el llamado a la acción. */
 export const OutroCard: React.FC<{

@@ -9,7 +9,7 @@ import { Captions } from "./components/Captions";
 import { HookText } from "./components/HookText";
 import { MissingVideo } from "./components/MissingVideo";
 import { OutroCard } from "./components/OutroCard";
-import { SafeZones } from "./components/SafeZones";
+import { SafeZones } from "../common/SafeZones";
 import { Watermark } from "./components/Watermark";
 import type { AdProps } from "./schema";
 

@@ -1,5 +1,5 @@
 import { AbsoluteFill, useVideoConfig } from "remotion";
-import { FONT_FAMILY } from "../theme";
+import { FONT_FAMILY } from "./theme";
 
 /**
  * Guías de las zonas de seguridad de Meta para 9:16.

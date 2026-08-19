@@ -7,8 +7,8 @@ import {
   useVideoConfig,
 } from "remotion";
 import type { Caption } from "../schema";
-import { SAFE_ZONE_BOTTOM } from "./SafeZones";
-import { FONT_FAMILY, readableOnVideo } from "../theme";
+import { SAFE_ZONE_BOTTOM } from "../../common/SafeZones";
+import { FONT_FAMILY, readableOnVideo } from "../../common/theme";
 
 const CaptionLine: React.FC<{ text: string; accentColor: string }> = ({
   text,

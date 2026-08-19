@@ -5,8 +5,8 @@ import {
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
-import { FONT_FAMILY, readableOnVideo } from "../theme";
-import { SAFE_ZONE_TOP } from "./SafeZones";
+import { FONT_FAMILY, readableOnVideo } from "../../common/theme";
+import { SAFE_ZONE_TOP } from "../../common/SafeZones";
 
 /**
  * El gancho: la frase grande de los primeros segundos, que es lo que decide
