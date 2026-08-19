@@ -7,6 +7,9 @@ import { adSchema } from "./Ad/schema";
 import { FPS as EMPORIO_FPS, TOTAL_FRAMES } from "./Emporio/beats";
 import { Emporio } from "./Emporio/Emporio";
 import { emporioSchema } from "./Emporio/schema";
+import { ugcSchema } from "./UGC/schema";
+import { UGC } from "./UGC/UGC";
+import { FPS as UGC_FPS, TOTAL_FRAMES as UGC_TOTAL_FRAMES } from "./UGC/ugc";
 
 /**
  * Cada <Composition> es una entrada del menú lateral de Remotion Studio.
@@ -65,6 +68,27 @@ export const RemotionRoot: React.FC = () => {
         durationInFrames={TOTAL_FRAMES}
         defaultProps={{
           photosReady: false,
+          price: "$49.990",
+          shipping: "Envío gratis",
+          cta: "Comprar ahora",
+          showSafeZones: false,
+        }}
+      />
+
+      {/*
+        Edición sobre el UGC ya grabado: el clip trae su propio audio y sus
+        cortes, así que acá solo se le suman los textos y el cierre.
+      */}
+      <Composition
+        // Para renderizar: npx remotion render UGC out/ugc.mp4
+        id="UGC"
+        component={UGC}
+        schema={ugcSchema}
+        fps={UGC_FPS}
+        width={1080}
+        height={1920}
+        durationInFrames={UGC_TOTAL_FRAMES}
+        defaultProps={{
           price: "$49.990",
           shipping: "Envío gratis",
           cta: "Comprar ahora",
