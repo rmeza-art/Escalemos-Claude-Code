@@ -7,6 +7,12 @@ import { adSchema } from "./Ad/schema";
 import { FPS as EMPORIO_FPS, TOTAL_FRAMES } from "./Emporio/beats";
 import { Emporio } from "./Emporio/Emporio";
 import { emporioSchema } from "./Emporio/schema";
+import { rutinaSchema } from "./Rutina/schema";
+import { Rutina } from "./Rutina/Rutina";
+import {
+  FPS as RUTINA_FPS,
+  TOTAL_FRAMES as RUTINA_TOTAL_FRAMES,
+} from "./Rutina/rutina";
 import { ugcSchema } from "./UGC/schema";
 import { UGC } from "./UGC/UGC";
 import { FPS as UGC_FPS, TOTAL_FRAMES as UGC_TOTAL_FRAMES } from "./UGC/ugc";
@@ -88,6 +94,27 @@ export const RemotionRoot: React.FC = () => {
         width={1080}
         height={1920}
         durationInFrames={UGC_TOTAL_FRAMES}
+        defaultProps={{
+          price: "$49.990",
+          shipping: "Envío gratis",
+          cta: "Comprar ahora",
+          showSafeZones: false,
+        }}
+      />
+
+      {/*
+        Anuncio de la rutina, armado con cuatro clips generados de 10 s. Los
+        tramos elegidos esquivan los saltos de identidad del material.
+      */}
+      <Composition
+        // Para renderizar: npx remotion render Rutina out/rutina.mp4
+        id="Rutina"
+        component={Rutina}
+        schema={rutinaSchema}
+        fps={RUTINA_FPS}
+        width={1080}
+        height={1920}
+        durationInFrames={RUTINA_TOTAL_FRAMES}
         defaultProps={{
           price: "$49.990",
           shipping: "Envío gratis",
