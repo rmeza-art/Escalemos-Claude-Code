@@ -1,56 +1,54 @@
-# Anuncio Emporio Orgánika — Meta 9:16
+# Remotion video
 
-Anuncio de 19,4 s para el Pack Fortalecedor Capilar, montado con
-[Remotion](https://remotion.dev): el video se define por código, así que
-cambiar un texto, un precio o una duración es editar un archivo y volver a
-renderizar.
+<p align="center">
+  <a href="https://github.com/remotion-dev/logo">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://github.com/remotion-dev/logo/raw/main/animated-logo-banner-dark.apng">
+      <img alt="Animated Remotion Logo" src="https://github.com/remotion-dev/logo/raw/main/animated-logo-banner-light.gif">
+    </picture>
+  </a>
+</p>
 
-```bash
-npm install
-npm run dev                      # abre Remotion Studio
-npx remotion render Anuncio out/anuncio.mp4
+Welcome to your Remotion project!
+
+## Commands
+
+**Install Dependencies**
+
+```console
+npm i
 ```
 
-## Cómo está armado
+**Start Preview**
 
-`src/Anuncio/anuncio.ts` es el guion: la lista de planos y la de rótulos. Casi
-todo lo que se quiera cambiar está ahí.
+```console
+npm run dev
+```
 
-- **Video y texto van en pistas separadas.** Cada paso de la rutina se cuenta
-  con dos planos seguidos bajo un solo rótulo, de modo que el texto se alcanza
-  a leer sin que la imagen se quede quieta.
-- **Sin voz en off:** el texto en pantalla es el que narra y la pieza funciona
-  en mudo, que es como se ve la mayoría de los anuncios en el feed.
-- **Cada plano se mueve.** La escala va de `scaleFrom` a `scaleTo` durante todo
-  el corte.
-- **El audio de cada tramo se conserva** con fundidos de cinco cuadros en los
-  cortes: los clips comparten una misma base sonora y sin eso el empalme se
-  oiría.
+**Render video**
 
-## Zonas de seguridad
+```console
+npx remotion render
+```
 
-Meta reserva el 14% superior para el nombre de la cuenta y el 35% inferior para
-el copy, los botones y el CTA. Todo el texto queda fuera de esas bandas. Para
-comprobarlo, `showSafeZones: true` las dibuja encima; se apaga para exportar.
+**Upgrade Remotion**
 
-Ojo con los márgenes en porcentaje: en CSS el `padding` en % se resuelve contra
-el **ancho** del contenedor, no contra el alto. En un 9:16 eso da poco más de la
-mitad del margen buscado. Por eso acá se calculan sobre la altura real.
+```console
+npx remotion upgrade
+```
 
-## El material
+## Docs
 
-Cuatro clips de 10 s más un UGC de 8 s, en `public/`. Todos traen cortes
-internos —hasta cinco tomas en diez segundos—, y el inventario de tomas está
-escrito arriba de `anuncio.ts`. **Cada rango del guion cae dentro de una sola
-toma**; conviene no moverlos sin mirar ese inventario.
+Get started with Remotion by reading the [fundamentals page](https://www.remotion.dev/docs/the-fundamentals).
 
-Dos tramos quedan descartados a propósito: la primera toma de `01-lavando` y el
-final de `03-masaje`. Los clips vienen generados y la identidad de la persona no
-se sostiene entre ellos.
+## Help
 
-## Tipografías
+We provide help on our [Discord server](https://discord.gg/6VzzNDwUwV).
 
-Salen de lo instalado en el sistema: no se descargan fuentes al renderizar. Eso
-mantiene el render reproducible, pero significa que el resultado depende de qué
-fuentes tenga la máquina. Para fijar la tipografía de la marca hay que dejar el
-`.ttf` en `public/` y cargarlo con `@font-face`.
+## Issues
+
+Found an issue with Remotion? [File an issue here](https://github.com/remotion-dev/remotion/issues/new).
+
+## License
+
+Note that for some entities a company license is needed. [Read the terms here](https://github.com/remotion-dev/remotion/blob/main/LICENSE.md).
