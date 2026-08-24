@@ -11,7 +11,9 @@ import { rutinaSchema } from "./Rutina/schema";
 import { Rutina } from "./Rutina/Rutina";
 import {
   FPS as RUTINA_FPS,
-  TOTAL_FRAMES as RUTINA_TOTAL_FRAMES,
+  performance as rutinaPerformance,
+  ritual as rutinaRitual,
+  totalFrames as rutinaTotalFrames,
 } from "./Rutina/rutina";
 import { ugcSchema } from "./UGC/schema";
 import { UGC } from "./UGC/UGC";
@@ -103,19 +105,38 @@ export const RemotionRoot: React.FC = () => {
       />
 
       {/*
-        Anuncio de la rutina, armado con cuatro clips generados de 10 s. Los
-        tramos elegidos esquivan los saltos de identidad del material.
+        Dos montajes sobre los mismos cuatro clips generados. Los tramos
+        elegidos esquivan los saltos de identidad del material.
       */}
       <Composition
-        // Para renderizar: npx remotion render Rutina out/rutina.mp4
-        id="Rutina"
+        // Para renderizar: npx remotion render RutinaPerformance out/rutina-performance.mp4
+        id="RutinaPerformance"
         component={Rutina}
         schema={rutinaSchema}
         fps={RUTINA_FPS}
         width={1080}
         height={1920}
-        durationInFrames={RUTINA_TOTAL_FRAMES}
+        durationInFrames={rutinaTotalFrames(rutinaPerformance)}
         defaultProps={{
+          variant: "performance" as const,
+          price: "$49.990",
+          shipping: "Envío gratis",
+          cta: "Comprar ahora",
+          showSafeZones: false,
+        }}
+      />
+
+      <Composition
+        // Para renderizar: npx remotion render RutinaRitual out/rutina-ritual.mp4
+        id="RutinaRitual"
+        component={Rutina}
+        schema={rutinaSchema}
+        fps={RUTINA_FPS}
+        width={1080}
+        height={1920}
+        durationInFrames={rutinaTotalFrames(rutinaRitual)}
+        defaultProps={{
+          variant: "ritual" as const,
           price: "$49.990",
           shipping: "Envío gratis",
           cta: "Comprar ahora",
