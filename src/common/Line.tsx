@@ -5,9 +5,9 @@ import {
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
-import { SAFE_ZONE_BOTTOM } from "../../common/SafeZones";
-import { FONT_FAMILY, FONT_SERIF } from "../../common/theme";
-import { EMPORIO } from "../theme";
+import { SAFE_ZONE_BOTTOM } from "./SafeZones";
+import { FONT_FAMILY, FONT_SERIF } from "./theme";
+import { EMPORIO } from "./emporio";
 
 /**
  * El texto que narra. Sin voz en off, es lo único que cuenta la historia, así
@@ -22,7 +22,12 @@ export const Line: React.FC<{
   const frame = useCurrentFrame();
   const { fps, width, height, durationInFrames } = useVideoConfig();
 
-  const entrance = spring({ frame, fps, config: { damping: 200 }, durationInFrames: 18 });
+  const entrance = spring({
+    frame,
+    fps,
+    config: { damping: 200 },
+    durationInFrames: 18,
+  });
   const exit = interpolate(
     frame,
     [durationInFrames - 9, durationInFrames - 1],

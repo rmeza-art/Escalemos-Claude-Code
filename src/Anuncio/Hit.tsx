@@ -4,9 +4,9 @@ import {
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
-import { SAFE_ZONE_BOTTOM } from "../../common/SafeZones";
-import { FONT_FAMILY } from "../../common/theme";
-import { EMPORIO } from "../../Emporio/theme";
+import { SAFE_ZONE_BOTTOM } from "../common/SafeZones";
+import { FONT_FAMILY } from "../common/theme";
+import { EMPORIO } from "../common/emporio";
 
 /**
  * Texto de la versión de performance: entra de golpe en tres cuadros, en
@@ -15,7 +15,8 @@ import { EMPORIO } from "../../Emporio/theme";
 export const Hit: React.FC<{
   text: string;
   step: number | null;
-}> = ({ text, step }) => {
+  note: string | null;
+}> = ({ text, step, note }) => {
   const frame = useCurrentFrame();
   const { width, height, durationInFrames } = useVideoConfig();
 
@@ -39,7 +40,8 @@ export const Hit: React.FC<{
       style={{
         justifyContent: "flex-end",
         alignItems: "center",
-        paddingBottom: height * (SAFE_ZONE_BOTTOM + 0.02),
+        // Con solo el 2% de margen la bajada rozaba la banda de Meta.
+        paddingBottom: height * (SAFE_ZONE_BOTTOM + 0.045),
         paddingLeft: width * 0.07,
         paddingRight: width * 0.07,
         opacity: snap * out,
@@ -69,7 +71,9 @@ export const Hit: React.FC<{
         <div
           style={{
             fontFamily: FONT_FAMILY,
-            fontSize: width * 0.088,
+            // El gancho es más largo que los rótulos: con el mismo cuerpo se
+            // iba a tres líneas y se comía el margen inferior.
+            fontSize: width * (step === null ? 0.074 : 0.088),
             lineHeight: 1.08,
             fontWeight: 900,
             letterSpacing: "-0.02em",
@@ -82,6 +86,22 @@ export const Hit: React.FC<{
         >
           {text}
         </div>
+
+        {note === null ? null : (
+          <div
+            style={{
+              fontFamily: FONT_FAMILY,
+              fontSize: width * 0.036,
+              fontWeight: 600,
+              letterSpacing: "0.02em",
+              color: EMPORIO.paper,
+              marginTop: width * 0.018,
+              textShadow: "0 3px 16px rgba(0, 0, 0, 0.7)",
+            }}
+          >
+            {note}
+          </div>
+        )}
       </div>
     </AbsoluteFill>
   );

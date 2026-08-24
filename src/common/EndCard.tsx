@@ -5,9 +5,9 @@ import {
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
-import { SAFE_ZONE_BOTTOM, SAFE_ZONE_TOP } from "../../common/SafeZones";
-import { FONT_FAMILY, FONT_SERIF } from "../../common/theme";
-import { EMPORIO } from "../theme";
+import { SAFE_ZONE_BOTTOM, SAFE_ZONE_TOP } from "./SafeZones";
+import { FONT_FAMILY, FONT_SERIF } from "./theme";
+import { EMPORIO } from "./emporio";
 
 /**
  * El cierre. Va sobre la foto y no dentro de un recuadro: el bodegón sigue
@@ -18,17 +18,25 @@ export const EndCard: React.FC<{
   price: string;
   shipping: string;
   cta: string;
-}> = ({ price, shipping, cta }) => {
+  /** Qué trae el pack. Va bajo el título, en una línea por producto. */
+  items: string[];
+}> = ({ price, shipping, cta, items }) => {
   const frame = useCurrentFrame();
   const { fps, width, height } = useVideoConfig();
 
   const at = (delay: number) =>
-    spring({ frame: frame - delay, fps, config: { damping: 200 }, durationInFrames: 20 });
+    spring({
+      frame: frame - delay,
+      fps,
+      config: { damping: 200 },
+      durationInFrames: 20,
+    });
 
   const brand = at(0);
   const title = at(6);
-  const cost = at(12);
-  const button = at(20);
+  const list = at(12);
+  const cost = at(20);
+  const button = at(28);
 
   const lift = (value: number) => ({
     opacity: value,
@@ -79,6 +87,24 @@ export const EndCard: React.FC<{
           }}
         >
           Pack Fortalecedor Capilar
+        </div>
+
+        <div style={{ marginTop: width * 0.025, ...lift(list) }}>
+          {items.map((item) => (
+            <div
+              key={item}
+              style={{
+                fontFamily: FONT_FAMILY,
+                fontSize: width * 0.03,
+                letterSpacing: "0.04em",
+                color: EMPORIO.paper,
+                opacity: 0.9,
+                marginTop: width * 0.008,
+              }}
+            >
+              {item}
+            </div>
+          ))}
         </div>
 
         <div

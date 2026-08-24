@@ -1,82 +1,56 @@
-# Editor de video con Remotion
+# Anuncio Emporio Orgánika — Meta 9:16
 
-Proyecto de [Remotion](https://remotion.dev) para montar anuncios en video por
-código: se toma un clip de origen y se le agregan encima gancho, subtítulos,
-marca de agua y una tarjeta de cierre. Al ser código, sacar diez variantes de
-un mismo anuncio es cambiar props, no volver a editar a mano.
-
-## Empezar
+Anuncio de 19,4 s para el Pack Fortalecedor Capilar, montado con
+[Remotion](https://remotion.dev): el video se define por código, así que
+cambiar un texto, un precio o una duración es editar un archivo y volver a
+renderizar.
 
 ```bash
 npm install
-npm run dev      # abre Remotion Studio
-```
-
-En el Studio se edita cada prop desde el panel derecho y se ve el resultado al
-instante.
-
-## Renderizar
-
-```bash
-npx remotion render Ad out/ad.mp4
+npm run dev                      # abre Remotion Studio
+npx remotion render Anuncio out/anuncio.mp4
 ```
 
 ## Cómo está armado
 
-El video de origen vive en `public/` y se referencia con `staticFile()`.
+`src/Anuncio/anuncio.ts` es el guion: la lista de planos y la de rótulos. Casi
+todo lo que se quiera cambiar está ahí.
 
-```
-src/Ad/
-  Ad.tsx          la composición: apila clip + capas
-  schema.ts       props validadas con zod (lo que se ve en el Studio)
-  metadata.ts     lee el video y calcula duración y tamaño de salida
-  captions.ts     los subtítulos y sus tiempos
-  theme.ts        tipografía y contorno para leer sobre imagen
-  components/     gancho, subtítulos, marca de agua, cierre
-```
+- **Video y texto van en pistas separadas.** Cada paso de la rutina se cuenta
+  con dos planos seguidos bajo un solo rótulo, de modo que el texto se alcanza
+  a leer sin que la imagen se quede quieta.
+- **Sin voz en off:** el texto en pantalla es el que narra y la pieza funciona
+  en mudo, que es como se ve la mayoría de los anuncios en el feed.
+- **Cada plano se mueve.** La escala va de `scaleFrom` a `scaleTo` durante todo
+  el corte.
+- **El audio de cada tramo se conserva** con fundidos de cinco cuadros en los
+  cortes: los clips comparten una misma base sonora y sin eso el empalme se
+  oiría.
 
-`metadata.ts` abre el archivo con [Mediabunny](https://mediabunny.dev) y deriva
-la duración: no hay que escribir `durationInFrames` a mano cada vez que cambia
-el clip o el recorte. Si el archivo no existe o no se puede leer, la
-composición muestra un cartel de ayuda en vez de romperse, para que el Studio
-igual abra.
+## Zonas de seguridad
 
-## Props
+Meta reserva el 14% superior para el nombre de la cuenta y el 35% inferior para
+el copy, los botones y el CTA. Todo el texto queda fuera de esas bandas. Para
+comprobarlo, `showSafeZones: true` las dibuja encima; se apaga para exportar.
 
-| Prop | Para qué sirve |
-| --- | --- |
-| `videoSrc` | Ruta dentro de `public/`. `null` muestra el cartel de ayuda. |
-| `format` | `original`, `9:16`, `1:1` o `16:9`. Define el tamaño de salida. |
-| `trimStartInSeconds` / `trimEndInSeconds` | Recorte del clip. `null` = hasta el final. |
-| `hook` | La frase grande de los primeros segundos. `null` la saca. |
-| `captions` | Lista de `{ text, startMs, endMs }`, en tiempos del montaje final. |
-| `watermark` | Texto y logo opcional arriba a la derecha. |
-| `outro` | Tarjeta de cierre con titular, botón y color de fondo. |
-| `accentColor` | Color de marca del gancho, el subrayado y el botón. |
+Ojo con los márgenes en porcentaje: en CSS el `padding` en % se resuelve contra
+el **ancho** del contenedor, no contra el alto. En un 9:16 eso da poco más de la
+mitad del margen buscado. Por eso acá se calculan sobre la altura real.
 
-Todo lo que sea `null` simplemente no se dibuja: sirve para probar el mismo
-clip con y sin cada capa.
+## El material
 
-## Variantes
+Cuatro clips de 10 s más un UGC de 8 s, en `public/`. Todos traen cortes
+internos —hasta cinco tomas en diez segundos—, y el inventario de tomas está
+escrito arriba de `anuncio.ts`. **Cada rango del guion cae dentro de una sola
+toma**; conviene no moverlos sin mirar ese inventario.
 
-Para renderizar el mismo clip con otro gancho u otro formato, sin tocar el
-código:
+Dos tramos quedan descartados a propósito: la primera toma de `01-lavando` y el
+final de `03-masaje`. Los clips vienen generados y la identidad de la persona no
+se sostiene entre ellos.
 
-```bash
-npx remotion render Ad out/ad-cuadrado.mp4 --props='{"format":"1:1"}'
-```
+## Tipografías
 
-Las props que se pasan se mezclan con las de `src/Root.tsx`.
-
-## Subtítulos
-
-Los tiempos de `captions.ts` están escritos a mano mirando la imagen. Para
-ajustarlos con precisión conviene moverse cuadro a cuadro en el Studio. Si más
-adelante se quiere transcribir el audio automáticamente, Remotion tiene
-[`@remotion/install-whisper-cpp`](https://www.remotion.dev/docs/install-whisper-cpp),
-que corre local pero necesita descargar el modelo la primera vez.
-
-## Fuentes
-
-Se usa la tipografía del sistema a propósito: no se descarga nada al
-renderizar, así el resultado es igual en cualquier máquina y en CI.
+Salen de lo instalado en el sistema: no se descargan fuentes al renderizar. Eso
+mantiene el render reproducible, pero significa que el resultado depende de qué
+fuentes tenga la máquina. Para fijar la tipografía de la marca hay que dejar el
+`.ttf` en `public/` y cargarlo con `@font-face`.

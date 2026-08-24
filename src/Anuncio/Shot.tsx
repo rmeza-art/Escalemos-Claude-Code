@@ -6,8 +6,8 @@ import {
   staticFile,
   useCurrentFrame,
 } from "remotion";
-import type { Segment } from "../rutina";
-import { AUDIO_FADE, FPS } from "../rutina";
+import type { Segment } from "./anuncio";
+import { AUDIO_FADE, FPS } from "./anuncio";
 
 /**
  * Un tramo de clip con entrada al plano. La escala se mueve durante todo el

@@ -49,7 +49,11 @@ export const SafeZones: React.FC = () => {
   return (
     <AbsoluteFill>
       <Band edge="top" fraction={SAFE_ZONE_TOP} label="14% · cuenta" />
-      <Band edge="bottom" fraction={SAFE_ZONE_BOTTOM} label="35% · copy, botones y CTA" />
+      <Band
+        edge="bottom"
+        fraction={SAFE_ZONE_BOTTOM}
+        label="35% · copy, botones y CTA"
+      />
     </AbsoluteFill>
   );
 };
