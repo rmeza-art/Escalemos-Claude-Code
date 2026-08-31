@@ -1,0 +1,151 @@
+@import 'tailwindcss';
+
+/*
+  Sistema visual del generador de briefs.
+
+  Un solo acento —un azul petróleo profundo— sobre papel cálido. La jerarquía
+  se construye con tipografía y líneas finas, no con sombras ni cajas de
+  colores: es un documento de trabajo, no un panel de métricas.
+*/
+@theme {
+  --color-canvas: #f7f5f1;
+  --color-surface: #ffffff;
+  --color-ink: #14202e;
+  --color-body: #38495c;
+  --color-muted: #6b7c90;
+  --color-line: #e3e0da;
+  --color-line-strong: #cfcbc3;
+
+  --color-accent: #135b7d;
+  --color-accent-strong: #0e4661;
+  --color-accent-soft: #e8f0f5;
+
+  --color-warn: #9a4b12;
+  --color-warn-soft: #fdf1e5;
+  --color-good: #1c6b4a;
+  --color-good-soft: #e8f3ee;
+  --color-info: #5b3f8f;
+  --color-info-soft: #f2effa;
+  --color-danger: #a32020;
+
+  --font-sans:
+    ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    sans-serif;
+
+  --radius-card: 0.5rem;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-canvas);
+    color: var(--color-body);
+    font-family: var(--font-sans);
+    /* Los formularios se llenan desde el celular: nada de texto chico. */
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, h4 {
+    color: var(--color-ink);
+    font-weight: 600;
+    line-height: 1.25;
+    text-wrap: balance;
+  }
+
+  /* Contraste de foco visible en todo lo que se pueda enfocar. */
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: 3px;
+  }
+
+  ::selection {
+    background: var(--color-accent);
+    color: #fff;
+  }
+}
+
+@layer components {
+  /* Campos del formulario. 16px reales para que iOS no haga zoom al enfocar. */
+  .campo {
+    @apply w-full rounded-md border border-line-strong bg-surface px-3.5 py-3 text-ink;
+    font-size: 16px;
+    transition: border-color 120ms ease, box-shadow 120ms ease;
+  }
+  .campo::placeholder {
+    color: var(--color-muted);
+  }
+  .campo:hover:not(:disabled) {
+    border-color: var(--color-muted);
+  }
+  .campo:focus {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px var(--color-accent-soft);
+    outline: none;
+  }
+  .campo:disabled {
+    @apply cursor-not-allowed bg-canvas text-muted;
+  }
+  .campo-error {
+    border-color: var(--color-danger);
+  }
+  .campo-error:focus {
+    box-shadow: 0 0 0 3px #f6e3e3;
+  }
+
+  .btn {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-md px-4 py-2.5
+           text-center font-medium transition-colors;
+    font-size: 1rem;
+  }
+  .btn:disabled {
+    @apply cursor-not-allowed opacity-55;
+  }
+  .btn-primario {
+    @apply bg-accent text-white hover:bg-accent-strong;
+  }
+  .btn-secundario {
+    @apply border border-line-strong bg-surface text-ink hover:border-muted hover:bg-canvas;
+  }
+  .btn-fantasma {
+    @apply text-accent hover:bg-accent-soft;
+  }
+  .btn-peligro {
+    @apply border border-danger/40 bg-surface text-danger hover:bg-danger/5;
+  }
+
+  .tarjeta {
+    @apply rounded-lg border border-line bg-surface;
+  }
+
+  .etiqueta {
+    @apply inline-flex items-center gap-1.5 rounded px-2 py-0.5 text-xs font-medium;
+  }
+
+  .enlace {
+    @apply text-accent underline decoration-accent/30 underline-offset-2 hover:decoration-accent;
+  }
+}
+
+/* Quien prefiera menos movimiento no ve ninguno. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media print {
+  .no-imprimir {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+  }
+}
