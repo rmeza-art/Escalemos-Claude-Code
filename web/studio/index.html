@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Escalemos Ecommerce — Estudio de tiendas Shopify</title>
+<meta name="description" content="Investigación de nicho, identidad y desarrollo en Shopify. Cuatro tiendas al mes, porque es la capacidad real.">
+<meta name="theme-color" content="#0B0B0B">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=EB+Garamond:ital,wght@0,400..600;1,400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+<a class="skip" href="#sobre">Ir al contenido</a>
+
+<!-- ============================ CARGA ============================ -->
+<div class="loader" id="loader" role="progressbar" aria-label="Cargando" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+  <div class="loader__top"><span>Escalemos</span><span>Tiendas Shopify</span></div>
+  <div class="loader__mark" aria-hidden="true"><span>ESCA</span><span>LEMOS</span></div>
+  <div class="loader__bottom">
+    <span>Cargando las cuatro tiendas</span>
+    <span class="loader__count">000</span>
+  </div>
+  <span class="loader__bar" aria-hidden="true"></span>
+</div>
+
+<div class="cursor" id="cursor" aria-hidden="true">
+  <span class="cursor__ring"></span>
+  <span class="cursor__label"></span>
+</div>
+
+<nav class="nav" aria-label="Principal">
+  <a class="nav__mark" href="#top">Escalemos</a>
+  <ul class="nav__links">
+    <li><a href="#sobre" data-spy="sobre">Sobre</a></li>
+    <li><a href="#trabajo" data-spy="trabajo">Trabajo</a></li>
+    <li><a href="#precio" data-spy="precio">Precio</a></li>
+    <li><a href="#contacto" data-spy="contacto">Contacto</a></li>
+  </ul>
+</nav>
+
+<main id="top">
+
+<!-- ============================ HERO ============================ -->
+<section class="hero" aria-labelledby="titular">
+  <canvas class="hero__canvas" id="scene" aria-hidden="true"></canvas>
+  <div class="hero__veil" aria-hidden="true"></div>
+
+  <h1 id="titular" class="hero__title">
+    <span class="line"><span>Escalemos</span></span>
+    <span class="line"><span>diseña tiendas.</span></span>
+  </h1>
+
+  <p class="hero__sub"><em>Una tienda al mes por marca.</em></p>
+
+  <div class="hero__meta">
+    <span class="hero__now" id="heroNow">Molitos · antes → después</span>
+    <span class="hero__scroll">Desliza para recorrer <i>↓</i></span>
+  </div>
+</section>
+
+<!-- ============================ 01 · SOBRE ============================ -->
+<section class="about" id="sobre" aria-labelledby="sobre-h">
+  <div class="about__sticky">
+    <header class="about__head">
+      <span class="idx" aria-hidden="true">01</span>
+      <span>El estudio</span>
+    </header>
+    <h2 id="sobre-h" class="sr-only">Una tienda no es una plantilla con tu logo encima. Escalemos es un estudio de una persona: yo investigo el nicho, diseño la tienda y la desarrollo en Shopify.</h2>
+    <p class="about__copy" aria-hidden="true">
+      <span class="s"><b>Una</b> <b>tienda</b> <b>no</b> <b>es</b> <b>una</b> <b>plantilla</b> <b>con</b> <b>tu</b> <b>logo</b> <b>encima.</b></span>
+      <span class="s dim"><b>Escalemos</b> <b>es</b> <b>un</b> <b>estudio</b> <b>de</b> <b><em>una</em></b> <b><em>persona</em>:</b> <b>yo</b> <b>investigo</b> <b>el</b> <b>nicho,</b> <b>diseño</b> <b>la</b> <b>tienda</b> <b>y</b> <b>la</b> <b>desarrollo</b> <b>en</b> <b>Shopify.</b></span>
+    </p>
+    <footer class="about__foot">
+      <span class="about__rule" aria-hidden="true"></span>
+      <dl class="about__facts">
+        <div><dt>Cómo trabajo</dt><dd>Investigo. Rediseño. Ajusto para convertir.</dd></div>
+        <div><dt>Dónde</dt><dd>Santiago, Chile. Marcas de todo el país.</dd></div>
+        <div><dt>Capacidad</dt><dd>Cuatro proyectos al mes. Treinta días cada uno.</dd></div>
+      </dl>
+    </footer>
+  </div>
+</section>
+
+<!-- ============================ 02 · TRABAJO ============================ -->
+<section class="work" id="trabajo" aria-labelledby="trabajo-h">
+  <header class="work__head" data-entered="false">
+    <span class="eyebrow">Trabajo seleccionado</span>
+    <h2 id="trabajo-h">
+      <span class="line"><span>Cuatro tiendas.</span></span>
+      <span class="line"><span>Arrastra y compara.</span></span>
+    </h2>
+    <span class="idx" aria-hidden="true">02</span>
+  </header>
+
+  <!-- Molitos -->
+  <article class="proj" data-entered="false" style="--tone:#524634">
+    <div class="proj__top"><span>01</span><span>Renovación · alimentos</span></div>
+    <div class="proj__intro">
+      <h3><span>Molitos</span></h3>
+      <p>Los productos estaban ordenados por envase, no por comida.</p>
+    </div>
+    <div class="browser" data-drag>
+      <div class="browser__bar" aria-hidden="true"><i></i><i></i><i></i><span>molitos.cl</span></div>
+      <div class="browser__screen">
+        <div class="compare" style="--p:50%">
+          <div class="compare__a"><img data-file="molitos-antes.jpg" src="../assets/img/molitos-antes.jpg" alt="Molitos antes del rediseño" width="1600" height="1000"></div>
+          <div class="compare__b"><img data-file="molitos-despues.jpg" src="../assets/img/molitos-despues.jpg" alt="Molitos después del rediseño" width="1600" height="1000"></div>
+          <input class="compare__range" type="range" min="0" max="100" step="0.1" value="50" aria-label="Comparar el antes y el después de Molitos">
+          <span class="compare__line"></span>
+          <span class="compare__grip"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6 4 12l5 6zM15 6l5 6-5 6z"/></svg></span>
+          <span class="compare__tag compare__tag--a">Antes</span>
+          <span class="compare__tag compare__tag--b">Después</span>
+        </div>
+      </div>
+    </div>
+    <footer class="proj__foot">
+      <div><span class="k">Cómo llegó</span><p>Plantilla estándar de Shopify, sin identidad, con los productos ordenados por formato de envase.</p></div>
+      <div><span class="k">Qué se hizo</span><p>Rediseño completo del sitio. El rebranding del producto corre por separado.</p></div>
+      <div class="why"><span class="k">El criterio</span><p class="is-pending">[Pendiente: el criterio de Molitos lo define Ricardo.]</p></div>
+    </footer>
+  </article>
+
+  <!-- Home Orgánika -->
+  <article class="proj" data-entered="false" style="--tone:#8C7A63">
+    <div class="proj__top"><span>02</span><span>Marca nueva · fragancias</span></div>
+    <div class="proj__intro">
+      <h3><span>Home Orgánika</span></h3>
+      <p>No se puede oler por la pantalla.</p>
+    </div>
+    <div class="browser">
+      <div class="browser__bar" aria-hidden="true"><i></i><i></i><i></i><span>homeorganika.cl</span></div>
+      <div class="browser__screen">
+        <div class="solo" style="--tone:#EFEEEB">
+          <img data-file="home-organika-tienda-creada-desde-cero.jpg" src="../assets/img/home-organika-tienda-creada-desde-cero.jpg" alt="Home Orgánika, tienda creada desde cero" width="1600" height="1000" loading="lazy">
+          <span class="solo__flag">Desde cero</span>
+        </div>
+      </div>
+    </div>
+    <footer class="proj__foot">
+      <div><span class="k">Cómo llegó</span><p>Marca nueva, sin tienda previa. Pedían plantilla propia, no un tema adaptado.</p></div>
+      <div><span class="k">Qué se hizo</span><p>Identidad visual, plantilla desde cero y experiencia de compra sobre el concepto de la marca.</p></div>
+      <div class="why"><span class="k">El criterio</span><p>La tienda no se organiza por producto sino por sensación. Quien no sabe cuál elegir entra por cómo quiere que se sienta el espacio.</p></div>
+    </footer>
+  </article>
+
+  <!-- Black Rabbit -->
+  <article class="proj" data-entered="false" style="--tone:#2D2F31">
+    <div class="proj__top"><span>03</span><span>Renovación · cuidado masculino</span></div>
+    <div class="proj__intro">
+      <h3><span>Black Rabbit</span></h3>
+      <p>Nadie llega buscando un shampoo. Llega con un problema.</p>
+    </div>
+    <div class="browser" data-drag>
+      <div class="browser__bar" aria-hidden="true"><i></i><i></i><i></i><span>blackrabbit.cl</span></div>
+      <div class="browser__screen">
+        <div class="compare" style="--p:50%">
+          <div class="compare__a"><img data-file="black-rabbit-antes.jpg" src="../assets/img/black-rabbit-antes.jpg" alt="Black Rabbit antes" width="1600" height="1000" loading="lazy"></div>
+          <div class="compare__b"><img data-file="black-rabbit-despues.jpg" src="../assets/img/black-rabbit-despues.jpg" alt="Black Rabbit después" width="1600" height="1000" loading="lazy"></div>
+          <input class="compare__range" type="range" min="0" max="100" step="0.1" value="50" aria-label="Comparar el antes y el después de Black Rabbit">
+          <span class="compare__line"></span>
+          <span class="compare__grip"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6 4 12l5 6zM15 6l5 6-5 6z"/></svg></span>
+          <span class="compare__tag compare__tag--a">Antes</span>
+          <span class="compare__tag compare__tag--b">Después</span>
+        </div>
+      </div>
+    </div>
+    <footer class="proj__foot">
+      <div><span class="k">Cómo llegó</span><p>Un ecommerce anterior mal construido, que no transmitía nada de la marca.</p></div>
+      <div><span class="k">Qué se hizo</span><p>Identidad proyectada sobre toda la tienda y reconstrucción de la experiencia de compra.</p></div>
+      <div class="why"><span class="k">El criterio</span><p>La tienda no parte con el catálogo sino con “¿qué le pasa a tu pelo?”, y el resto se ordena en una rutina de tres pasos.</p></div>
+    </footer>
+  </article>
+
+  <!-- Barra Zero -->
+  <article class="proj" data-entered="false" style="--tone:#0D413D">
+    <div class="proj__top"><span>04</span><span>Renovación · bebidas sin alcohol</span></div>
+    <div class="proj__intro">
+      <h3><span>Barra Zero</span></h3>
+      <p>No prometer ausencia. Prometer sabor.</p>
+    </div>
+    <div class="browser" data-drag>
+      <div class="browser__bar" aria-hidden="true"><i></i><i></i><i></i><span>barrazero.cl</span></div>
+      <div class="browser__screen">
+        <div class="compare" style="--p:50%">
+          <div class="compare__a"><img data-file="barra-zero-antes.jpg" src="../assets/img/barra-zero-antes.jpg" alt="Barra Zero antes" width="1600" height="1000" loading="lazy"></div>
+          <div class="compare__b"><img data-file="barra-zero-despues.jpg" src="../assets/img/barra-zero-despues.jpg" alt="Barra Zero después" width="1600" height="1000" loading="lazy"></div>
+          <input class="compare__range" type="range" min="0" max="100" step="0.1" value="50" aria-label="Comparar el antes y el después de Barra Zero">
+          <span class="compare__line"></span>
+          <span class="compare__grip"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6 4 12l5 6zM15 6l5 6-5 6z"/></svg></span>
+          <span class="compare__tag compare__tag--a">Antes</span>
+          <span class="compare__tag compare__tag--b">Después</span>
+        </div>
+      </div>
+    </div>
+    <footer class="proj__foot">
+      <div><span class="k">Cómo llegó</span><p>Como Zona Libre de Alcohol, con un sitio obsoleto frente a los estándares actuales.</p></div>
+      <div><span class="k">Qué se hizo</span><p>Renovación completa: rediseño del sitio y de la experiencia de punta a punta.</p></div>
+      <div class="why"><span class="k">El criterio</span><p>Quien compra sin alcohol teme estar renunciando a algo. La barra de mocktails sale de su escondite y entra a la navegación principal.</p></div>
+    </footer>
+  </article>
+</section>
+
+<!-- ============================ 03 · PRECIO ============================ -->
+<section class="price" id="precio" aria-labelledby="precio-h">
+  <header class="price__head" data-entered="false">
+    <span class="eyebrow">El precio</span>
+    <h2 id="precio-h">
+      <span class="line"><span>Un valor, sin</span></span>
+      <span class="line"><span>reunión previa.</span></span>
+    </h2>
+    <span class="idx" aria-hidden="true">03</span>
+  </header>
+
+  <div class="price__grid" data-entered="false">
+    <div class="price__left">
+      <p class="price__fig"><span class="count" data-to="650000">$650.000</span></p>
+      <p class="price__fine">Tiendas de hasta 30 SKU. Sobre eso, se cotiza según el catálogo.</p>
+      <p class="price__voice">Es un precio de <em>etapa inicial</em>. Estoy construyendo los primeros casos de esta línea, y el valor lo refleja. Cuando el portafolio esté completo, el precio sube — los proyectos que entren ahora mantienen el valor acordado.</p>
+    </div>
+    <ol class="price__list">
+      <li>Investigación del nicho y de la competencia, documentada</li>
+      <li>Identidad visual aplicada a la tienda completa</li>
+      <li>Diseño y desarrollo del sitio en Shopify</li>
+      <li>Arquitectura de categorías y del flujo hasta el checkout</li>
+      <li>Fichas de producto estructuradas para vender</li>
+      <li>Versión móvil resuelta, no adaptada a última hora</li>
+      <li>Entrega con la tienda publicada y funcionando</li>
+    </ol>
+  </div>
+  <p class="price__out">Fuera del alcance: fotografía, catálogo escrito y pauta. Se cotizan aparte.</p>
+</section>
+
+<!-- ============================ 04 · CONTACTO ============================ -->
+<section class="contact" id="contacto" aria-labelledby="contacto-h">
+  <div class="contact__sticky">
+    <div class="contact__curtain" aria-hidden="true"></div>
+    <header class="contact__head"><span class="idx" aria-hidden="true">04</span><span>Contacto</span></header>
+    <div class="contact__body">
+      <p class="contact__eyebrow">Media hora, sin costo.</p>
+      <h2 id="contacto-h" aria-label="Partamos mirando tu tienda.">
+        <span class="line" aria-hidden="true"><span>Partamos mirando</span></span>
+        <span class="line" aria-hidden="true"><span>tu tienda.</span></span>
+      </h2>
+      <p class="contact__lede">Reviso tu tienda en vivo y te digo qué cambiaría y por qué. Si te sirve, seguimos. Si no, te quedas igual con la revisión.</p>
+      <a class="contact__mail" href="mailto:rmeza@escalemos.cl">
+        <span><small>Escríbeme</small>rmeza@escalemos.cl</span>
+        <i aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M7 25 25 7M11 7h14v14"/></svg></i>
+      </a>
+      <p class="contact__alt">O por <a href="https://wa.me/56900000000">WhatsApp</a>. Contesto yo, no un formulario.</p>
+    </div>
+    <footer class="contact__foot">
+      <span>Escalemos Ecommerce · Santiago, Chile</span>
+      <a href="#top">Volver arriba ↑</a>
+    </footer>
+  </div>
+</section>
+
+</main>
+
+<script src="assets/js/app.js"></script>
+</body>
+</html>

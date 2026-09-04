@@ -16,14 +16,25 @@ web/
 │   ├── css/styles.css
 │   ├── js/app.js
 │   └── img/            los siete pantallazos de los casos + la tarjeta OG
-└── viv/                versión 2 — con el sistema visual de vivmgmt.com
-    ├── index.html
+├── viv/                versión 2 — con el sistema visual de vivmgmt.com
+│   ├── index.html
+│   ├── README.md
+│   └── assets/
+└── studio/             versión 3 — la de viv/ más la capa de experiencia
+    ├── index.html      de nexstudio.tech, en un solo scroll
     ├── README.md
     └── assets/
 ```
 
-Son **dos versiones del mismo contenido**, para comparar. La de `viv/` reusa las
-imágenes de `assets/img/`; lo demás es propio. Ver `viv/README.md`.
+Son **tres versiones del mismo contenido**, para comparar. `viv/` y `studio/`
+reusan las imágenes de `assets/img/`; lo demás es propio de cada una. Ver el
+README de cada carpeta.
+
+| | Estructura | Identidad | Movimiento |
+|---|---|---|---|
+| `index.html` | 9 pantallas por hash | Oscura, Archivo sola | Entrada por pantalla |
+| `viv/` | 9 pantallas por hash | Papel, serif + grotesca, grilla visible | Revelados y hover |
+| `studio/` | **Una página, un scroll** | La de `viv/` | Carga, cursor, canvas, secciones pegadas, cortina |
 
 Se eligió estático porque el repo es un proyecto Remotion (video), no una app
 web: agregar React o un bundler aquí solo sumaría build sin ganar nada. El
