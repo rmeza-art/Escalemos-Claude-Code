@@ -46,19 +46,17 @@
 
 <!-- ============================ HERO ============================ -->
 <section class="hero" aria-labelledby="titular">
-  <canvas class="hero__canvas" id="scene" aria-hidden="true"></canvas>
-  <div class="hero__veil" aria-hidden="true"></div>
-
-  <h1 id="titular" class="hero__title">
-    <span class="line"><span>Escalemos</span></span>
-    <span class="line"><span>diseña tiendas.</span></span>
+  <h1 id="titular" class="hero__h">
+    <span class="sr-only">Escalemos diseña tiendas.</span>
+    <span class="mark" id="mark" aria-hidden="true">Escalemos</span>
   </h1>
 
-  <p class="hero__sub"><em>Una tienda al mes por marca.</em></p>
-
-  <div class="hero__meta">
-    <span class="hero__now" id="heroNow">Molitos · antes → después</span>
-    <span class="hero__scroll">Desliza para recorrer <i>↓</i></span>
+  <div class="hero__foot">
+    <p class="hero__line" data-split>diseña tiendas.</p>
+    <div class="hero__meta">
+      <span class="hero__hint" id="heroHint">Mueve el cursor</span>
+      <span class="hero__scroll">Desliza para recorrer <i>↓</i></span>
+    </div>
   </div>
 </section>
 
@@ -100,7 +98,7 @@
   <article class="proj" data-entered="false" style="--tone:#524634">
     <div class="proj__top"><span>01</span><span>Renovación · alimentos</span></div>
     <div class="proj__intro">
-      <h3><span>Molitos</span></h3>
+      <h3><span data-split>Molitos</span></h3>
       <p>Los productos estaban ordenados por envase, no por comida.</p>
     </div>
     <div class="browser" data-drag>
@@ -128,7 +126,7 @@
   <article class="proj" data-entered="false" style="--tone:#8C7A63">
     <div class="proj__top"><span>02</span><span>Marca nueva · fragancias</span></div>
     <div class="proj__intro">
-      <h3><span>Home Orgánika</span></h3>
+      <h3><span data-split>Home Orgánika</span></h3>
       <p>No se puede oler por la pantalla.</p>
     </div>
     <div class="browser">
@@ -151,7 +149,7 @@
   <article class="proj" data-entered="false" style="--tone:#2D2F31">
     <div class="proj__top"><span>03</span><span>Renovación · cuidado masculino</span></div>
     <div class="proj__intro">
-      <h3><span>Black Rabbit</span></h3>
+      <h3><span data-split>Black Rabbit</span></h3>
       <p>Nadie llega buscando un shampoo. Llega con un problema.</p>
     </div>
     <div class="browser" data-drag>
@@ -179,7 +177,7 @@
   <article class="proj" data-entered="false" style="--tone:#0D413D">
     <div class="proj__top"><span>04</span><span>Renovación · bebidas sin alcohol</span></div>
     <div class="proj__intro">
-      <h3><span>Barra Zero</span></h3>
+      <h3><span data-split>Barra Zero</span></h3>
       <p>No prometer ausencia. Prometer sabor.</p>
     </div>
     <div class="browser" data-drag>

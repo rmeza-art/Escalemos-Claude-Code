@@ -3,7 +3,7 @@
 
    1. Carga real, gatillada por la precarga de las siete imágenes
    2. Cursor propio, con estado sobre enlaces y sobre comparadores
-   3. Canvas de apertura: las cuatro tiendas pasando de antes a después
+   3. La apertura es una sola palabra moviéndose por el eje de ancho
    4. Revelados por intersección
    5. El párrafo del estudio se enciende palabra por palabra con el scroll
    6. Cortina de cierre
@@ -60,7 +60,7 @@
       loader.classList.add('is-done');
       document.body.classList.remove('is-loading');
       document.body.classList.add('is-ready');
-      iniciarEscena();
+      iniciarTipografia();
     }, espera);
   }
 
@@ -107,98 +107,112 @@
     })();
   }
 
-  /* ============================ 3 · canvas de apertura ============================ */
+  /* ============================ 3 · la palabra que escala ============================ */
 
-  var lienzo = document.getElementById('scene');
-  var ctx = lienzo.getContext('2d');
-  var rotulo = document.getElementById('heroNow');
-  var DUR = 4200;   // lo que dura una tienda
-  var idx = 0, t0 = 0, manual = -1, ultimoToque = 0;
+  /* Archivo tiene eje de ancho (wdth 62–125). Ese eje es la animación.
+     En cada paso se recalcula el tamaño para que el ancho del texto siga
+     siendo exactamente el de la caja: la palabra cambia de proporción sin
+     despegarse de los bordes. Los anchos se miden una vez por valor entero
+     y se guardan, así el bucle sólo escribe dos propiedades. */
 
-  function medir() {
-    var r = lienzo.getBoundingClientRect();
-    var d = Math.min(window.devicePixelRatio || 1, 2);
-    lienzo.width = Math.round(r.width * d);
-    lienzo.height = Math.round(r.height * d);
-    ctx.setTransform(d, 0, 0, d, 0, 0);
-    return r;
+  var mark = document.getElementById('mark');
+  var pista = document.getElementById('heroHint');
+  var REF = 300, W0 = 62, W1 = 125;
+  var tabla = [], cajaW = 0;
+
+  function medirTabla() {
+    if (!mark) return;
+    cajaW = mark.parentElement.getBoundingClientRect().width;
+    var antes = mark.getAttribute('style') || '';
+    mark.style.fontSize = REF + 'px';
+    tabla = [];
+    for (var w = W0; w <= W1; w++) {
+      mark.style.fontVariationSettings = "'wdth' " + w;
+      tabla[w] = mark.offsetWidth;
+    }
+    mark.setAttribute('style', antes);
+    // se reserva la altura del caso más alto (el más angosto, que es el de
+    // mayor cuerpo) para que nada salte mientras la palabra respira
+    if (tabla[W0]) {
+      var alto = REF * (cajaW / tabla[W0]) * 0.8;
+      mark.parentElement.style.minHeight = Math.round(alto) + 'px';
+    }
   }
 
-  function cubrir(img, w, h) {
-    if (!img || !img.naturalWidth) return;
-    var ri = img.naturalWidth / img.naturalHeight;
-    var rc = w / h;
-    var dw, dh;
-    if (ri > rc) { dh = h; dw = h * ri; } else { dw = w; dh = w / ri; }
-    ctx.drawImage(img, (w - dw) / 2, 0, dw, dh);   // anclado arriba, como en las fichas
+  function pintarMarca(w) {
+    if (!mark || !tabla.length) return;
+    w = clamp(w, W0, W1);
+    // el eje se pinta con decimales, así que el ancho se interpola entre los
+    // dos enteros vecinos de la tabla; redondear dejaba la palabra hasta 9px
+    // fuera del borde
+    var i0 = Math.floor(w), i1 = Math.min(W1, i0 + 1);
+    if (!tabla[i0] || !tabla[i1]) return;
+    var ancho = tabla[i0] + (tabla[i1] - tabla[i0]) * (w - i0);
+    mark.style.fontVariationSettings = "'wdth' " + w.toFixed(1);
+    mark.style.fontSize = (REF * (cajaW / ancho)).toFixed(2) + 'px';
   }
 
-  function cuadro(ahora) {
-    var r = lienzo.getBoundingClientRect();
-    var w = r.width, h = r.height;
-    if (!w || !h) { requestAnimationFrame(cuadro); return; }
+  var actual = W0, objetivo = 100, finIntro = 0, ultimoPuntero = -9999, usada = false, pistaPrev = '';
 
-    var tienda = TIENDAS[idx];
-    var p;
-    if (manual >= 0 && ahora - ultimoToque < 1600) {
-      p = manual;
+  function latir(ahora) {
+    if (ahora < finIntro) {
+      actual = W0 + (100 - W0) * easeInOut(1 - (finIntro - ahora) / 1500);
     } else {
-      if (manual >= 0) { manual = -1; t0 = ahora; }
-      var e = (ahora - t0) / DUR;
-      if (e >= 1) { idx = (idx + 1) % TIENDAS.length; t0 = ahora; e = 0; tienda = TIENDAS[idx]; }
-      p = easeInOut(clamp((e - .18) / .58, 0, 1));   // entra, barre, descansa
+      var base = (ahora - ultimoPuntero < 2000)
+        ? objetivo
+        : 100 + Math.sin(ahora / 2400) * 5;      // respiración cuando nadie toca
+      actual += (base - actual) * .12;
     }
-
-    ctx.clearRect(0, 0, w, h);
-    cubrir(archivo[tienda.antes], w, h);
-
-    if (!tienda.sinAntes) {
-      var x = w * p;
-      ctx.save();
-      ctx.beginPath();
-      ctx.rect(0, 0, x, h);
-      ctx.clip();
-      cubrir(archivo[tienda.despues], w, h);
-      ctx.restore();
-      if (p > .001 && p < .999) {
-        ctx.fillStyle = '#F85C0F';
-        ctx.fillRect(x - 1, 0, 2, h);
-      }
+    pintarMarca(actual);
+    if (pista) {
+      var t = usada ? 'Ancho ' + Math.round(actual) : 'Mueve el cursor';
+      if (t !== pistaPrev) { pista.textContent = t; pistaPrev = t; }
     }
-
-    var texto = tienda.sinAntes
-      ? tienda.nombre + ' · creada desde cero'
-      : tienda.nombre + ' · antes → después';
-    if (rotulo.textContent !== texto) rotulo.textContent = texto;
-
-    requestAnimationFrame(cuadro);
+    requestAnimationFrame(latir);
   }
 
-  function iniciarEscena() {
-    medir();
-    if (reduce) {
-      var w = lienzo.getBoundingClientRect().width, h = lienzo.getBoundingClientRect().height;
-      cubrir(archivo[TIENDAS[0].antes], w, h);
-      ctx.save(); ctx.beginPath(); ctx.rect(0, 0, w * .55, h); ctx.clip();
-      cubrir(archivo[TIENDAS[0].despues], w, h); ctx.restore();
-      ctx.fillStyle = '#F85C0F'; ctx.fillRect(w * .55 - 1, 0, 2, h);
-      return;
-    }
-    t0 = performance.now();
-    requestAnimationFrame(cuadro);
+  function iniciarTipografia() {
+    if (!mark) return;
+    medirTabla();
+    if (reduce) { pintarMarca(100); return; }
+    finIntro = performance.now() + 1500;
+    requestAnimationFrame(latir);
   }
 
-  window.addEventListener('resize', function () { medir(); });
-
-  // la apertura responde al puntero: el barrido sigue el cursor
   var hero = document.querySelector('.hero');
   if (hero && !reduce) {
     hero.addEventListener('pointermove', function (e) {
       var r = hero.getBoundingClientRect();
-      manual = clamp((e.clientX - r.left) / r.width, 0, 1);
-      ultimoToque = performance.now();
+      objetivo = W0 + clamp((e.clientX - r.left) / r.width, 0, 1) * (W1 - W0);
+      ultimoPuntero = performance.now();
+      if (!usada) { usada = true; pista.classList.add('is-used'); }
     });
   }
+
+  var reMedir;
+  window.addEventListener('resize', function () {
+    clearTimeout(reMedir);
+    reMedir = setTimeout(function () { medirTabla(); pintarMarca(actual); }, 160);
+  });
+
+  /* ---------- revelado letra por letra ---------- */
+
+  document.querySelectorAll('[data-split]').forEach(function (el) {
+    var txt = el.textContent.trim();
+    el.setAttribute('aria-label', txt);
+    el.classList.add('is-split');
+    var frag = document.createDocumentFragment();
+    txt.split('').forEach(function (ch, i) {
+      var s = document.createElement('span');
+      s.className = 'ch';
+      s.setAttribute('aria-hidden', 'true');
+      s.style.setProperty('--i', i);
+      s.textContent = ch === ' ' ? '\u00A0' : ch;
+      frag.appendChild(s);
+    });
+    el.textContent = '';
+    el.appendChild(frag);
+  });
 
   /* ============================ 4 · revelados ============================ */
 
