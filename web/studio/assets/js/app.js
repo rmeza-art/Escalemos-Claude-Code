@@ -309,6 +309,18 @@
 
   /* ============================ scroll ============================ */
 
+  /* El nav va sobre fondo oscuro en la apertura y en el cierre, y sobre
+     papel en el medio. Se marca por posición en vez de mezclar, así el
+     símbolo del logo conserva su naranja. */
+  var navEl = document.querySelector('.nav');
+  function pintarNav() {
+    if (!navEl || !hero) return;
+    var y = window.scrollY + 30;
+    var finHero = hero.offsetTop + hero.offsetHeight;
+    var iniContacto = contacto ? contacto.offsetTop : Infinity;
+    navEl.classList.toggle('sobre-claro', y > finHero && y < iniContacto);
+  }
+
   var pendiente = false;
   function alScroll() {
     if (pendiente) return;
@@ -316,6 +328,7 @@
     requestAnimationFrame(function () {
       pintarAbout();
       pintarCortina();
+      pintarNav();
       pendiente = false;
     });
   }

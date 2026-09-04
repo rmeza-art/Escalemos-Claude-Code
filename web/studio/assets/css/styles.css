@@ -21,7 +21,7 @@
   --night: #0B0B0B;
   --night-2: #8E8880;
   --night-rule: rgba(255, 255, 255, .16);
-  --ac: #F85C0F;
+  --ac: #FA5C0C;          /* medido del logo: es su color dominante */
 
   --max: 1560px;
   --gut: clamp(20px, 4vw, 60px);
@@ -103,12 +103,7 @@ a { color: inherit; text-decoration: none; }
   font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
   color: var(--night-2);
 }
-.loader__mark {
-  display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 .06em;
-  font-variation-settings: 'wdth' 118; font-weight: 800;
-  font-size: clamp(46px, 13vw, 190px); line-height: .84; letter-spacing: -.045em;
-}
-.loader__mark span { display: block; overflow: hidden; }
+.loader__logo { width: min(78vw, 720px); height: auto; }
 .loader__count { color: var(--paper); font-variant-numeric: tabular-nums; }
 .loader__bar {
   position: absolute; left: 0; right: 0; bottom: 0; height: 2px;
@@ -153,12 +148,15 @@ a { color: inherit; text-decoration: none; }
   padding: 16px var(--gut);
   color: var(--paper);
   transition: color .45s var(--ease);
-  mix-blend-mode: difference;
 }
+.nav.sobre-claro { color: var(--ink); }
+
 .nav__mark {
+  display: inline-flex; align-items: center; gap: 9px;
   font-variation-settings: 'wdth' 118; font-weight: 800;
   font-size: 15px; letter-spacing: -.015em; text-transform: uppercase;
 }
+.nav__sym { height: 19px; width: auto; flex: 0 0 auto; }
 .nav__links { list-style: none; display: flex; gap: clamp(14px, 2vw, 30px); margin: 0; padding: 0; }
 .nav__links a {
   position: relative; font-size: 12px; font-weight: 700;
