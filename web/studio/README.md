@@ -22,7 +22,7 @@ Ese era el problema real: no faltaba movimiento, faltaba continuidad.
 | `site-loader` con contador `000` y barra en `scaleX` | Igual, gatillado por la precarga real de las siete imágenes |
 | `fluid-cursor` con `data-interactive` / `data-pressed` | Cursor propio; crece sobre enlaces y sobre los comparadores, donde dice «arrastra» |
 | `<canvas id="scene">` con el `h1` en `sr-only` | No se tomó: la apertura es sólo tipografía y el titular es HTML |
-| `about__word` × N | El párrafo del estudio se enciende palabra por palabra con el scroll |
+| `about__word` × N | Reemplazado: la frase de la sección se rediseña a sí misma con el scroll |
 | `work__title-line > span` | Revelado por líneas con máscara |
 | `data-entered="false"` | Igual, por `IntersectionObserver` |
 | `about__sticky`, `contact__sticky` | Secciones pegadas con progreso propio |
@@ -47,9 +47,17 @@ El eje sigue al cursor de lado a lado, y cuando nadie toca respira sola entre 95
 y 105. El indicador de abajo muestra el valor del eje en vivo.
 
 **Cada fuente se mueve por el eje que tiene.** Archivo por el de ancho: el
-wordmark, los títulos de proyecto al pasar el cursor, el nav. EB Garamond no
-tiene eje de ancho, así que el párrafo del estudio se mueve por el de peso —
-400 → 560 a medida que cada palabra se enciende.
+wordmark, los títulos de proyecto al pasar el cursor, el nav.
+
+**La frase se rediseña a sí misma.** En la sección 01 la misma oración está dos
+veces: una puesta como plantilla — Times, gris, sin jerarquía — y otra puesta con
+criterio, con Archivo para la negación y Garamond para la afirmación. Entre las
+dos barre la misma barra naranja de los comparadores, movida por el scroll, con
+sus etiquetas `plantilla` y `criterio`.
+
+Es el mismo mecanismo que se usa con las tiendas, aplicado a las propias palabras
+del sitio: idénticas en las dos capas, lo único que cambia es el criterio. El
+sitio se hace a sí mismo lo que les hace a ellas.
 
 **El navegador falso es honesto.** Lo que se muestra son sitios web; enmarcarlos
 en un navegador con su dominio es decir la verdad sobre qué se está viendo, no un

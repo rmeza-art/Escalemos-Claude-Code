@@ -5,7 +5,7 @@
    2. Cursor propio, con estado sobre enlaces y sobre comparadores
    3. La apertura es una sola palabra moviéndose por el eje de ancho
    4. Revelados por intersección
-   5. El párrafo del estudio se enciende palabra por palabra con el scroll
+   5. La frase de apertura de la sección se rediseña a sí misma al bajar
    6. Cortina de cierre
    7. Contador del precio y marcado del nav
 
@@ -228,20 +228,32 @@
 
   document.querySelectorAll('[data-entered]').forEach(function (el) { ojo.observe(el); });
 
-  /* ============================ 5 · palabra por palabra ============================ */
+  /* ============================ 5 · la frase que se rediseña ============================ */
+
+  /* Mismo mecanismo que los comparadores de las tiendas: una barra que
+     barre de izquierda a derecha y cambia lo que se ve. Acá lo que cambia
+     no es una tienda, son las mismas palabras puestas de otra manera. */
 
   var about = document.querySelector('.about');
-  var palabras = Array.prototype.slice.call(document.querySelectorAll('.about__copy b'));
+  var rebuild = document.querySelector('.rebuild');
   var regla = document.querySelector('.about__rule');
+
+  function avanceAbout() {
+    if (!about) return 0;
+    var r = about.getBoundingClientRect();
+    var total = about.offsetHeight - window.innerHeight;
+    return clamp((-r.top) / (total || 1), 0, 1);
+  }
 
   function pintarAbout() {
     if (!about) return;
-    var r = about.getBoundingClientRect();
-    var total = about.offsetHeight - window.innerHeight;
-    var p = clamp((-r.top) / (total || 1), 0, 1);
-    var hasta = Math.round(clamp(p / .78, 0, 1) * palabras.length);
-    for (var i = 0; i < palabras.length; i++) palabras[i].classList.toggle('on', i < hasta);
-    if (regla) regla.style.setProperty('--rp', clamp((p - .72) / .24, 0, 1));
+    var p = avanceAbout();
+    if (rebuild) {
+      var w = clamp((p - .10) / .55, 0, 1);
+      rebuild.style.setProperty('--w', (w * 100).toFixed(2) + '%');
+      rebuild.classList.toggle('is-mid', w > .015 && w < .985);
+    }
+    if (regla) regla.style.setProperty('--rp', clamp((p - .74) / .22, 0, 1));
   }
 
   /* ============================ 6 · cortina ============================ */

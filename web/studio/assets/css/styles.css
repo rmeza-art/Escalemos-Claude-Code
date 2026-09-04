@@ -243,14 +243,20 @@ a { color: inherit; text-decoration: none; }
 [data-entered="true"] .ch { transform: none; }
 
 /* ============================================================
-   01 · SOBRE — sección pegada, revelado palabra por palabra
+   01 · EL CRITERIO — la frase se rediseña a sí misma
+
+   Dos capas con exactamente las mismas palabras: una puesta como
+   plantilla (Times, gris, sin jerarquía) y otra puesta con criterio
+   (Archivo para la negación, Garamond para la afirmación). Entre las
+   dos, la misma barra naranja que se arrastra en las tiendas, movida
+   por el scroll. El sitio se hace a sí mismo lo que les hace a ellas.
    ============================================================ */
 
-.about { height: 260svh; position: relative; }
+.about { height: 210svh; position: relative; }
 .about__sticky {
   position: sticky; top: 0;
   min-height: 100svh;
-  display: flex; flex-direction: column; justify-content: center; gap: clamp(28px, 4vw, 56px);
+  display: flex; flex-direction: column; justify-content: center; gap: clamp(30px, 4.5vw, 62px);
   padding: clamp(80px, 10vw, 120px) var(--gut) clamp(30px, 4vw, 56px);
   max-width: var(--max); margin: 0 auto;
 }
@@ -260,21 +266,63 @@ a { color: inherit; text-decoration: none; }
   color: var(--ink-2);
 }
 
-.about__copy { margin: 0; max-width: 22ch; }
-.about__copy .s { display: block; }
-.about__copy .s + .s { margin-top: .35em; }
-.about__copy b {
-  display: inline-block;
-  font-family: var(--serif); font-weight: 400;
-  font-size: clamp(26px, 5vw, 76px); line-height: 1.1; letter-spacing: -.02em;
-  color: color-mix(in srgb, var(--ink) 12%, transparent);
-  font-variation-settings: 'wght' 400;
-  transition: color .5s var(--ease), font-variation-settings .7s var(--ease);
+.rebuild { position: relative; display: grid; max-width: min(100%, 1000px); }
+.rebuild__layer { grid-area: 1 / 1; margin: 0; align-self: center; }
+
+/* la capa de plantilla: sin jerarquía, sin contraste, sin decisiones */
+.rebuild__before {
+  clip-path: inset(0 0 0 var(--w));
+  font-family: "Times New Roman", Times, serif;
+  font-weight: 400;
+  font-size: clamp(17px, 1.9vw, 27px);
+  line-height: 1.45;
+  letter-spacing: 0;
+  color: #948E86;
 }
-.about__copy b em { font-style: italic; }
-.about__copy b.on { color: var(--ink); font-variation-settings: 'wght' 560; }
-.about__copy .dim b.on { color: var(--ink-2); }
-.about__copy .dim b.on em { color: var(--ac); }
+
+/* la capa con criterio: las dos tipografías haciendo cada una su parte */
+.rebuild__after { clip-path: inset(0 calc(100% - var(--w)) 0 0); }
+.rebuild__after .a {
+  display: block;
+  font-family: var(--sans); font-weight: 800;
+  font-variation-settings: 'wdth' 112;
+  font-size: clamp(27px, 4.4vw, 64px); line-height: .98; letter-spacing: -.035em;
+}
+.rebuild__after .b {
+  display: block; margin-top: .1em;
+  font-family: var(--serif); font-style: italic; font-weight: 400;
+  font-size: clamp(25px, 4vw, 58px); line-height: 1.04; letter-spacing: -.012em;
+}
+.rebuild__after .b em { font-style: italic; color: var(--ac); }
+
+.rebuild__edge {
+  position: absolute; top: -8%; bottom: -8%; left: var(--w);
+  width: 1.5px; background: var(--ac);
+  transform: translateX(-.75px);
+  opacity: 0; transition: opacity .3s;
+}
+.rebuild.is-mid .rebuild__edge { opacity: 1; }
+
+.rebuild__tag {
+  position: absolute; bottom: -30px;
+  font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+  opacity: 0; transition: opacity .35s;
+}
+.rebuild__tag--a { left: 0; color: var(--ink-2); }
+.rebuild__tag--b { left: 0; color: var(--ac); }
+.rebuild.is-mid .rebuild__tag { opacity: 1; }
+.rebuild.is-mid .rebuild__tag--a { left: calc(var(--w) + 12px); }
+.rebuild.is-mid .rebuild__tag--b { left: auto; right: calc(100% - var(--w) + 12px); }
+
+/* ---------- el resto, horizontal ---------- */
+
+.about__grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: clamp(20px, 3.4vw, 56px);
+  max-width: 96ch;
+}
+.about__body { margin: 0; font-size: clamp(15px, 1.25vw, 18px); line-height: 1.6; }
+.about__body--dim { color: var(--ink-2); }
 
 .about__foot { display: grid; gap: 20px; }
 .about__rule { display: block; height: 1px; background: var(--rule); transform: scaleX(var(--rp, 0)); transform-origin: left; }
@@ -518,8 +566,8 @@ a { color: inherit; text-decoration: none; }
 @media (max-width: 760px) {
   .nav__links { gap: 12px; }
   .nav__links a { font-size: 10px; letter-spacing: .08em; }
-  .about { height: 220svh; }
-  .about__copy { max-width: none; }
+  .about { height: 190svh; }
+  .rebuild { max-width: none; }
   .compare, .solo { aspect-ratio: 4 / 3; }
   .proj__intro { display: block; }
   .proj__intro p { margin-top: 12px; }
@@ -529,8 +577,8 @@ a { color: inherit; text-decoration: none; }
   html { scroll-behavior: auto; }
   .line > span, .proj__intro h3 > span, .ch { transform: none !important; }
   .proj__top, .proj__intro p, .browser, .proj__foot, .price__list li { opacity: 1 !important; transform: none !important; }
-  .about__copy b { color: var(--ink); }
-  .about__copy .dim b { color: var(--ink-2); }
+  .rebuild__before { clip-path: none; opacity: 0; }
+  .rebuild__after { clip-path: none; }
   .hero__scroll i { animation: none; }
   .cursor { display: none; }
   .contact__curtain { display: none; }
