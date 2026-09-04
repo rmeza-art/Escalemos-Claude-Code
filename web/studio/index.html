@@ -14,12 +14,12 @@
 </head>
 <body>
 
-<a class="skip" href="#sobre">Ir al contenido</a>
+<a class="skip" href="#criterio">Ir al contenido</a>
 
 <!-- ============================ CARGA ============================ -->
 <div class="loader" id="loader" role="progressbar" aria-label="Cargando" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
   <div class="loader__top"><span>Escalemos</span><span>Tiendas Shopify</span></div>
-  <img class="loader__logo" src="../assets/img/escalemos-logo.png" alt="Escalemos" width="965" height="175">
+  <img class="loader__sym" id="loaderSym" src="../assets/img/escalemos-simbolo.png" alt="Escalemos" width="218" height="175">
   <div class="loader__bottom">
     <span>Cargando las cuatro tiendas</span>
     <span class="loader__count">000</span>
@@ -38,7 +38,8 @@
     <span>Escalemos</span>
   </a>
   <ul class="nav__links">
-    <li><a href="#sobre" data-spy="sobre">Sobre</a></li>
+    <li><a href="#criterio" data-spy="criterio">Criterio</a></li>
+    <li><a href="#proceso" data-spy="proceso">Proceso</a></li>
     <li><a href="#trabajo" data-spy="trabajo">Trabajo</a></li>
     <li><a href="#precio" data-spy="precio">Precio</a></li>
     <li><a href="#contacto" data-spy="contacto">Contacto</a></li>
@@ -51,7 +52,10 @@
 <section class="hero" aria-labelledby="titular">
   <h1 id="titular" class="hero__h">
     <span class="sr-only">Escalemos diseña tiendas.</span>
-    <span class="mark" id="mark" aria-hidden="true">Escalemos</span>
+    <span class="lockup" id="lockup" aria-hidden="true">
+      <img class="lockup__sym" id="heroSym" src="../assets/img/escalemos-simbolo.png" alt="" width="218" height="175">
+      <span class="lockup__word"><span class="mark" id="mark">escalemos</span></span>
+    </span>
   </h1>
 
   <div class="hero__foot">
@@ -64,7 +68,7 @@
 </section>
 
 <!-- ============================ 01 · EL CRITERIO ============================ -->
-<section class="about" id="sobre" aria-labelledby="sobre-h">
+<section class="about" id="criterio" aria-labelledby="criterio-h">
   <div class="about__sticky">
     <header class="about__head">
       <span class="idx" aria-hidden="true">01</span>
@@ -72,12 +76,13 @@
     </header>
 
     <!-- La misma frase, dos veces: puesta como plantilla y puesta con
-         criterio. Entre las dos, la barra del comparador. -->
+         criterio. La palabra «plantilla» está en la frase, así que la capa
+         de plantilla es literalmente lo que la frase describe. -->
     <div class="rebuild" style="--w:0%">
-      <p class="rebuild__layer rebuild__before" aria-hidden="true">No soy un estudio. Soy una persona con un criterio.</p>
-      <h2 id="sobre-h" class="rebuild__layer rebuild__after">
-        <span class="a">No soy un estudio.</span>
-        <span class="b">Soy una persona con un <em>criterio</em>.</span>
+      <p class="rebuild__layer rebuild__before" aria-hidden="true">Una tienda no es una plantilla con tu logo encima.</p>
+      <h2 id="criterio-h" class="rebuild__layer rebuild__after">
+        <span class="a">Una tienda no es una <em>plantilla</em></span>
+        <span class="b">con tu logo encima.</span>
       </h2>
       <span class="rebuild__edge" aria-hidden="true"></span>
       <span class="rebuild__tag rebuild__tag--a" aria-hidden="true">Plantilla</span>
@@ -85,46 +90,76 @@
     </div>
 
     <div class="about__grid">
-      <p class="about__body">Una tienda no es una plantilla con tu logo encima. Es una decisión detrás de otra: qué se muestra primero, cómo se ordena, qué se dice. Con el método correcto y las herramientas bien aplicadas, eso llega muy lejos.</p>
+      <p class="about__body">Una tienda es la representación de un producto, o de una solución, que resuelve una necesidad concreta. Eso es lo que tiene que quedar en pantalla.</p>
       <p class="about__body about__body--dim">Yo investigo el nicho, diseño la tienda y la desarrollo en Shopify. No hay traspaso entre áreas ni cuentas que administrar.</p>
     </div>
 
     <footer class="about__foot">
       <span class="about__rule" aria-hidden="true"></span>
       <dl class="about__facts">
-        <div><dt>Cómo trabajo</dt><dd>Investigo. Rediseño. Ajusto para convertir.</dd></div>
         <div><dt>Dónde</dt><dd>Santiago, Chile. Marcas de todo el país.</dd></div>
-        <div><dt>Capacidad</dt><dd>Cuatro proyectos al mes. Treinta días cada uno.</dd></div>
+        <div><dt>Capacidad</dt><dd>Cuatro proyectos al mes.</dd></div>
+        <div><dt>Cada uno</dt><dd>Treinta días de trabajo.</dd></div>
       </dl>
     </footer>
   </div>
 </section>
 
-<!-- ============================ 02 · TRABAJO ============================ -->
+<!-- ============================ 02 · EL PROCESO ============================ -->
+<!-- El isotipo recorre las cuatro etapas con el scroll: la marca es una
+     hoja que asciende, así que avanzar por el proceso es lo que dibuja. -->
+<section class="proceso" id="proceso" aria-labelledby="proceso-h">
+  <div class="proceso__inner">
+    <header class="proceso__head" data-entered="false">
+      <span class="eyebrow">Cómo se hace</span>
+      <h2 id="proceso-h">
+        <span class="line"><span>Treinta días,</span></span>
+        <span class="line"><span>cuatro etapas.</span></span>
+      </h2>
+      <span class="idx" aria-hidden="true">02</span>
+    </header>
+
+    <div class="via" style="--v:0%">
+      <span class="via__riel" aria-hidden="true"></span>
+      <span class="via__hecho" aria-hidden="true"></span>
+      <img class="via__sym" src="../assets/img/escalemos-simbolo-tinta.png" alt="" width="218" height="175" aria-hidden="true">
+      <ol class="via__pasos">
+        <li><span class="n">01</span><h3>Investigación</h3><p>El nicho y la competencia, documentados. Antes de dibujar nada.</p></li>
+        <li><span class="n">02</span><h3>Identidad</h3><p>Una propuesta visual para la tienda entera. No un logo pegado encima.</p></li>
+        <li><span class="n">03</span><h3>Diseño y desarrollo</h3><p>El sitio en Shopify, con la arquitectura y el flujo hasta el checkout.</p></li>
+        <li><span class="n">04</span><h3>Ficha y estructura</h3><p>Las fichas armadas para vender, y el móvil resuelto de entrada.</p></li>
+      </ol>
+    </div>
+
+    <p class="proceso__fin"><span aria-hidden="true">→</span> Se entrega con la tienda <em>publicada y funcionando</em>.</p>
+  </div>
+</section>
+
+<!-- ============================ 03 · TRABAJO ============================ -->
 <section class="work" id="trabajo" aria-labelledby="trabajo-h">
   <header class="work__head" data-entered="false">
-    <span class="eyebrow">Trabajo seleccionado</span>
+    <span class="eyebrow">Cuatro tiendas</span>
     <h2 id="trabajo-h">
-      <span class="line"><span>Cuatro tiendas.</span></span>
-      <span class="line"><span>Arrastra y compara.</span></span>
+      <span class="line"><span>Lo que cambió.</span></span>
+      <span class="line"><span>Y por qué cambió.</span></span>
     </h2>
-    <span class="idx" aria-hidden="true">02</span>
+    <span class="idx" aria-hidden="true">03</span>
   </header>
 
-  <!-- Molitos -->
-  <article class="proj" data-entered="false" style="--tone:#524634">
-    <div class="proj__top"><span>01</span><span>Renovación · alimentos</span></div>
+  <!-- Barra Zero -->
+  <article class="proj" data-entered="false" style="--tone:#0D413D">
+    <div class="proj__top"><span>01</span><span>Renovación · bebidas sin alcohol</span></div>
     <div class="proj__intro">
-      <h3><span data-split>Molitos</span></h3>
-      <p>Los productos estaban ordenados por envase, no por comida.</p>
+      <h3><span data-split>Barra Zero</span></h3>
+      <p>No prometer ausencia. Prometer sabor.</p>
     </div>
     <div class="browser" data-drag>
-      <div class="browser__bar" aria-hidden="true"><i></i><i></i><i></i><span>molitos.cl</span></div>
+      <div class="browser__bar" aria-hidden="true"><i></i><i></i><i></i><span>barrazero.cl</span></div>
       <div class="browser__screen">
         <div class="compare" style="--p:50%">
-          <div class="compare__a"><img data-file="molitos-antes.jpg" src="../assets/img/molitos-antes.jpg" alt="Molitos antes del rediseño" width="1600" height="1000"></div>
-          <div class="compare__b"><img data-file="molitos-despues.jpg" src="../assets/img/molitos-despues.jpg" alt="Molitos después del rediseño" width="1600" height="1000"></div>
-          <input class="compare__range" type="range" min="0" max="100" step="0.1" value="50" aria-label="Comparar el antes y el después de Molitos">
+          <div class="compare__a"><img data-file="barra-zero-antes.jpg" src="../assets/img/barra-zero-antes.jpg" alt="Barra Zero antes" width="1600" height="1000" loading="lazy"></div>
+          <div class="compare__b"><img data-file="barra-zero-despues.jpg" src="../assets/img/barra-zero-despues.jpg" alt="Barra Zero después" width="1600" height="1000" loading="lazy"></div>
+          <input class="compare__range" type="range" min="0" max="100" step="0.1" value="50" aria-label="Comparar el antes y el después de Barra Zero">
           <span class="compare__line"></span>
           <span class="compare__grip"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6 4 12l5 6zM15 6l5 6-5 6z"/></svg></span>
           <span class="compare__tag compare__tag--a">Antes</span>
@@ -133,9 +168,9 @@
       </div>
     </div>
     <footer class="proj__foot">
-      <div><span class="k">Cómo llegó</span><p>Plantilla estándar de Shopify, sin identidad, con los productos ordenados por formato de envase.</p></div>
-      <div><span class="k">Qué se hizo</span><p>Rediseño completo del sitio. El rebranding del producto corre por separado.</p></div>
-      <div class="why"><span class="k">El criterio</span><p class="is-pending">[Pendiente: el criterio de Molitos lo define Ricardo.]</p></div>
+      <div><span class="k">Cómo llegó</span><p>Como Zona Libre de Alcohol, con un sitio obsoleto frente a los estándares actuales.</p></div>
+      <div><span class="k">Qué se hizo</span><p>Renovación completa: rediseño del sitio y de la experiencia de punta a punta.</p></div>
+      <div class="why"><span class="k">El criterio</span><p>Quien compra sin alcohol teme estar renunciando a algo. La barra de mocktails sale de su escondite y entra a la navegación principal.</p></div>
     </footer>
   </article>
 
@@ -190,20 +225,20 @@
     </footer>
   </article>
 
-  <!-- Barra Zero -->
-  <article class="proj" data-entered="false" style="--tone:#0D413D">
-    <div class="proj__top"><span>04</span><span>Renovación · bebidas sin alcohol</span></div>
+  <!-- Molitos -->
+  <article class="proj" data-entered="false" style="--tone:#524634">
+    <div class="proj__top"><span>04</span><span>Renovación · alimentos</span></div>
     <div class="proj__intro">
-      <h3><span data-split>Barra Zero</span></h3>
-      <p>No prometer ausencia. Prometer sabor.</p>
+      <h3><span data-split>Molitos</span></h3>
+      <p>Los productos estaban ordenados por envase, no por comida.</p>
     </div>
     <div class="browser" data-drag>
-      <div class="browser__bar" aria-hidden="true"><i></i><i></i><i></i><span>barrazero.cl</span></div>
+      <div class="browser__bar" aria-hidden="true"><i></i><i></i><i></i><span>molitos.cl</span></div>
       <div class="browser__screen">
         <div class="compare" style="--p:50%">
-          <div class="compare__a"><img data-file="barra-zero-antes.jpg" src="../assets/img/barra-zero-antes.jpg" alt="Barra Zero antes" width="1600" height="1000" loading="lazy"></div>
-          <div class="compare__b"><img data-file="barra-zero-despues.jpg" src="../assets/img/barra-zero-despues.jpg" alt="Barra Zero después" width="1600" height="1000" loading="lazy"></div>
-          <input class="compare__range" type="range" min="0" max="100" step="0.1" value="50" aria-label="Comparar el antes y el después de Barra Zero">
+          <div class="compare__a"><img data-file="molitos-antes.jpg" src="../assets/img/molitos-antes.jpg" alt="Molitos antes del rediseño" width="1600" height="1000"></div>
+          <div class="compare__b"><img data-file="molitos-despues.jpg" src="../assets/img/molitos-despues.jpg" alt="Molitos después del rediseño" width="1600" height="1000"></div>
+          <input class="compare__range" type="range" min="0" max="100" step="0.1" value="50" aria-label="Comparar el antes y el después de Molitos">
           <span class="compare__line"></span>
           <span class="compare__grip"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6 4 12l5 6zM15 6l5 6-5 6z"/></svg></span>
           <span class="compare__tag compare__tag--a">Antes</span>
@@ -212,14 +247,14 @@
       </div>
     </div>
     <footer class="proj__foot">
-      <div><span class="k">Cómo llegó</span><p>Como Zona Libre de Alcohol, con un sitio obsoleto frente a los estándares actuales.</p></div>
-      <div><span class="k">Qué se hizo</span><p>Renovación completa: rediseño del sitio y de la experiencia de punta a punta.</p></div>
-      <div class="why"><span class="k">El criterio</span><p>Quien compra sin alcohol teme estar renunciando a algo. La barra de mocktails sale de su escondite y entra a la navegación principal.</p></div>
+      <div><span class="k">Cómo llegó</span><p>Plantilla estándar de Shopify, sin identidad, con los productos ordenados por formato de envase.</p></div>
+      <div><span class="k">Qué se hizo</span><p>Rediseño completo del sitio. El rebranding del producto corre por separado.</p></div>
+      <div class="why"><span class="k">El criterio</span><p class="is-pending">[Pendiente: el criterio de Molitos lo define Ricardo.]</p></div>
     </footer>
   </article>
 </section>
 
-<!-- ============================ 03 · PRECIO ============================ -->
+<!-- ============================ 04 · PRECIO ============================ -->
 <section class="price" id="precio" aria-labelledby="precio-h">
   <header class="price__head" data-entered="false">
     <span class="eyebrow">El precio</span>
@@ -227,21 +262,18 @@
       <span class="line"><span>Un valor, sin</span></span>
       <span class="line"><span>reunión previa.</span></span>
     </h2>
-    <span class="idx" aria-hidden="true">03</span>
+    <span class="idx" aria-hidden="true">04</span>
   </header>
 
   <div class="price__grid" data-entered="false">
     <div class="price__left">
       <p class="price__fig"><span class="count" data-to="650000">$650.000</span></p>
       <p class="price__fine">Tiendas de hasta 30 SKU. Sobre eso, se cotiza según el catálogo.</p>
-      <p class="price__voice">No me mueve la urgencia. Me mueve que una tienda <em>represente de verdad</em> la identidad de la marca y la propuesta de valor de quien está detrás.</p>
+      <p class="price__voice"><em>Cuatro proyectos al mes.</em> Es la capacidad que tengo hoy para trabajar cada tienda de forma personalizada, con los treinta días que necesita.</p>
     </div>
     <ol class="price__list">
-      <li>Investigación del nicho y de la competencia, documentada</li>
-      <li>Identidad visual aplicada a la tienda completa</li>
-      <li>Diseño y desarrollo del sitio en Shopify</li>
-      <li>Arquitectura de categorías y del flujo hasta el checkout</li>
-      <li>Fichas de producto estructuradas para vender</li>
+      <li>Las cuatro etapas del proceso, completas</li>
+      <li>Arquitectura de categorías y flujo hasta el checkout</li>
       <li>Versión móvil resuelta, no adaptada a última hora</li>
       <li>Entrega con la tienda publicada y funcionando</li>
     </ol>
@@ -249,11 +281,11 @@
   <p class="price__out">Fuera del alcance: fotografía, catálogo escrito y pauta. Se cotizan aparte.</p>
 </section>
 
-<!-- ============================ 04 · CONTACTO ============================ -->
+<!-- ============================ 05 · CONTACTO ============================ -->
 <section class="contact" id="contacto" aria-labelledby="contacto-h">
   <div class="contact__sticky">
     <div class="contact__curtain" aria-hidden="true"></div>
-    <header class="contact__head"><span class="idx" aria-hidden="true">04</span><span>Contacto</span></header>
+    <header class="contact__head"><span class="idx" aria-hidden="true">05</span><span>Contacto</span></header>
     <div class="contact__body">
       <p class="contact__eyebrow">Media hora, sin costo.</p>
       <h2 id="contacto-h" aria-label="Partamos mirando tu tienda.">
@@ -261,11 +293,11 @@
         <span class="line" aria-hidden="true"><span>tu tienda.</span></span>
       </h2>
       <p class="contact__lede">Reviso tu tienda en vivo y te digo qué cambiaría y por qué. Si te sirve, seguimos. Si no, te quedas igual con la revisión.</p>
-      <a class="contact__mail" href="mailto:rmeza@escalemos.cl">
-        <span><small>Escríbeme</small>rmeza@escalemos.cl</span>
+      <a class="contact__mail" href="https://wa.me/56900000000">
+        <span><small>Háblame directo</small>WhatsApp</span>
         <i aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M7 25 25 7M11 7h14v14"/></svg></i>
       </a>
-      <p class="contact__alt">O por <a href="https://wa.me/56900000000">WhatsApp</a>. Contesto yo, no un formulario.</p>
+      <p class="contact__alt">O por correo a <a href="mailto:rmeza@escalemos.cl">rmeza@escalemos.cl</a>. Contesto yo, no un formulario.</p>
     </div>
     <footer class="contact__foot">
       <span>Escalemos Ecommerce · Santiago, Chile</span>

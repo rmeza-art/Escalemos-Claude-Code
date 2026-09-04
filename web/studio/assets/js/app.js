@@ -5,7 +5,7 @@
    2. Cursor propio, con estado sobre enlaces y sobre comparadores
    3. La apertura es una sola palabra moviéndose por el eje de ancho
    4. Revelados por intersección
-   5. La frase de apertura de la sección se rediseña a sí misma al bajar
+   5. La frase se rediseña sola y el isotipo recorre el proceso
    6. Cortina de cierre
    7. Contador del precio y marcado del nav
 
@@ -53,14 +53,30 @@
 
   var arranque = Date.now();
 
+  /* El símbolo no desaparece: se mide dónde queda en el nav y se lleva
+     hasta ahí, mientras el fondo de la carga se apaga. */
+  function volarSimbolo() {
+    var desde = document.getElementById('loaderSym');
+    var hasta = document.querySelector('.nav__sym');
+    if (desde && hasta && !reduce) {
+      var a = desde.getBoundingClientRect(), b = hasta.getBoundingClientRect();
+      if (a.width && b.width) {
+        desde.style.transform = 'translate(' + (b.left - a.left).toFixed(1) + 'px,' +
+          (b.top - a.top).toFixed(1) + 'px) scale(' + (b.width / a.width).toFixed(4) + ')';
+      }
+    }
+    loader.classList.add('is-done');
+    setTimeout(function () { loader.style.display = 'none'; }, reduce ? 0 : 1150);
+  }
+
   function terminar() {
     var espera = Math.max(0, 700 - (Date.now() - arranque));
     setTimeout(function () {
       pintarProgreso(1);
-      loader.classList.add('is-done');
       document.body.classList.remove('is-loading');
       document.body.classList.add('is-ready');
       iniciarTipografia();
+      requestAnimationFrame(volarSimbolo);
     }, espera);
   }
 
@@ -120,9 +136,11 @@
   var REF = 300, W0 = 62, W1 = 125;
   var tabla = [], cajaW = 0;
 
+  var cajaPalabra = document.querySelector('.lockup__word');
+
   function medirTabla() {
-    if (!mark) return;
-    cajaW = mark.parentElement.getBoundingClientRect().width;
+    if (!mark || !cajaPalabra) return;
+    cajaW = cajaPalabra.getBoundingClientRect().width;
     var antes = mark.getAttribute('style') || '';
     mark.style.fontSize = REF + 'px';
     tabla = [];
@@ -135,7 +153,7 @@
     // mayor cuerpo) para que nada salte mientras la palabra respira
     if (tabla[W0]) {
       var alto = REF * (cajaW / tabla[W0]) * 0.8;
-      mark.parentElement.style.minHeight = Math.round(alto) + 'px';
+      cajaPalabra.style.minHeight = Math.round(alto) + 'px';
     }
   }
 
@@ -256,6 +274,20 @@
     if (regla) regla.style.setProperty('--rp', clamp((p - .74) / .22, 0, 1));
   }
 
+  /* ============================ 5b · el proceso ============================ */
+
+  var via = document.querySelector('.via');
+  var pasos = document.querySelectorAll('.via__pasos li');
+
+  function pintarVia() {
+    if (!via) return;
+    var r = via.getBoundingClientRect(), vh = window.innerHeight;
+    var p = clamp((vh * .78 - r.top) / (r.height + vh * .30), 0, 1);
+    via.style.setProperty('--v', (p * 100).toFixed(1) + '%');
+    var hechos = Math.floor(p * pasos.length + .18);
+    for (var i = 0; i < pasos.length; i++) pasos[i].classList.toggle('is-hecho', i < hechos);
+  }
+
   /* ============================ 6 · cortina ============================ */
 
   var contacto = document.querySelector('.contact');
@@ -287,7 +319,7 @@
   }
 
   var espias = document.querySelectorAll('[data-spy]');
-  var secciones = ['sobre', 'trabajo', 'precio', 'contacto'].map(function (id) { return document.getElementById(id); });
+  var secciones = ['criterio', 'proceso', 'trabajo', 'precio', 'contacto'].map(function (id) { return document.getElementById(id); });
 
   var spy = new IntersectionObserver(function (filas) {
     filas.forEach(function (f) {
@@ -328,6 +360,7 @@
     requestAnimationFrame(function () {
       pintarAbout();
       pintarCortina();
+      pintarVia();
       pintarNav();
       pendiente = false;
     });
