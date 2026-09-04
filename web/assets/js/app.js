@@ -85,15 +85,21 @@
     render(screenFromHash());
   });
 
-  /* Volver arriba también cuando se pincha el hash ya activo
-     (en ese caso el navegador no dispara hashchange). */
+  /* Los enlaces internos se resuelven aquí y no en el navegador: así la
+     navegación funciona igual si se pincha el hash ya activo (que no dispara
+     hashchange) o si la página va embebida donde el hash no se propaga. */
   document.addEventListener('click', function (e) {
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
     var a = e.target.closest ? e.target.closest('a[href^="#"]') : null;
     if (!a) return;
-    if (a.getAttribute('href') === window.location.hash) {
-      e.preventDefault();
-      window.scrollTo(0, 0);
-    }
+    var key = a.getAttribute('href').slice(1);
+    if (!ROUTES[key]) return;
+    e.preventDefault();
+    try {
+      if (window.location.hash !== '#' + key) window.location.hash = '#' + key;
+    } catch (err) { /* hash no disponible: seguimos con el render directo */ }
+    render(ROUTES[key]);
+    window.scrollTo(0, 0);
   });
 
   /* ---------------- comparadores antes / después ---------------- */
