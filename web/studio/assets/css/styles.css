@@ -92,35 +92,66 @@ a { color: inherit; text-decoration: none; }
 .loader {
   position: fixed; inset: 0; z-index: 300;
   background: var(--night); color: var(--paper);
-  display: flex; flex-direction: column; justify-content: space-between;
+  display: grid; grid-template-rows: 1fr auto;
+  align-items: center; justify-items: center;
   padding: clamp(20px, 4vw, 48px);
 }
 
 
-.loader__top, .loader__bottom {
+.loader__bottom {
+  width: 100%; align-self: end;
   display: flex; justify-content: space-between; gap: 16px;
   font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
   color: var(--night-2);
 }
+/* La apertura es el logo original, entero y centrado, encendiéndose de
+   izquierda a derecha con la carga real: el logo ES la barra de progreso,
+   así que no hace falta ninguna. Se dibuja con el mismo PNG recortado por
+   el hueco vertical vacío que hay entre isotipo y palabra (columnas
+   217-224 de 965), sin redibujar nada. Al terminar, la palabra se recoge
+   y sólo el isotipo viaja a su lugar en el nav, donde sigue midiendo el
+   avance de la página. */
+.loader__lock {
+  position: relative;
+  width: min(74vw, 620px); aspect-ratio: 965 / 175;
+}
+.loader__base, .loader__cap { position: absolute; inset: 0; }
+.loader__base {
+  background: url(../../../assets/img/escalemos-logo.png) center / contain no-repeat;
+  opacity: .17;
+  transition: opacity .5s var(--ease);
+}
+.loader__cap {
+  clip-path: inset(0 calc(100% - var(--carga, 0%)) 0 0);
+  transition: clip-path .5s var(--ease);
+}
+.loader__sym, .loader__word {
+  position: absolute; top: 0; height: 100%;
+  background-image: url(../../../assets/img/escalemos-logo.png);
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+}
 .loader__sym {
-  width: min(34vw, 260px); height: auto;
+  left: 0; aspect-ratio: 218 / 175; background-position: left center;
   transform-origin: top left;
   transition: transform 1s var(--ease);
 }
+.loader__word {
+  left: 23.316%; aspect-ratio: 740 / 175; background-position: right center;
+  transition: opacity .45s var(--ease), transform .7s var(--ease);
+}
+.loader.is-done .loader__base { opacity: 0; }
+.loader.is-done .loader__word { opacity: 0; transform: translateX(-10px); }
+/* el recorte se suelta para que el isotipo pueda salir de la caja al volar */
+.loader.is-done .loader__cap { clip-path: none; }
 /* la carga no se va hacia arriba: se apaga el fondo y el símbolo viaja
    hasta su lugar en el nav, así no aparece y desaparece */
 .loader { transition: background-color .9s var(--ease), opacity .9s var(--ease); }
 .loader.is-done { background: transparent; pointer-events: none; }
-.loader.is-done .loader__top,
-.loader.is-done .loader__bottom,
-.loader.is-done .loader__bar { opacity: 0; transition: opacity .35s; }
+.loader.is-done .loader__bottom { opacity: 0; transition: opacity .35s; }
 .nav__sym { opacity: 0; transition: opacity .3s; }
 .is-ready .nav__sym { opacity: 1; transition-delay: .95s; }
 .loader__count { color: var(--paper); font-variant-numeric: tabular-nums; }
-.loader__bar {
-  position: absolute; left: 0; right: 0; bottom: 0; height: 2px;
-  background: var(--ac); transform: scaleX(0); transform-origin: left;
-}
 
 /* ============================================================
    CURSOR
@@ -561,6 +592,31 @@ a { color: inherit; text-decoration: none; }
 .solo { position: relative; aspect-ratio: 16 / 10; background: var(--tone, var(--rule)); overflow: hidden; }
 .solo img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
 .solo__flag { right: 0; background: var(--ac); color: var(--paper); }
+
+/* ---------- el enlace a la tienda, visible ---------- */
+
+.proj__ver {
+  margin-top: clamp(18px, 2.4vw, 30px);
+  display: inline-flex; align-items: center; gap: 12px;
+  padding-bottom: 7px; border-bottom: 1px solid var(--rule);
+  transition: color .3s var(--ease), border-color .3s var(--ease);
+}
+.proj__ver span {
+  font-size: 12px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase;
+  font-variation-settings: 'wdth' 112;
+}
+.proj__ver em {
+  font-family: var(--serif); font-style: italic; font-size: 17px; color: var(--ink-2);
+  transition: color .3s var(--ease);
+}
+.proj__ver svg {
+  width: 15px; height: 15px; flex: 0 0 auto;
+  fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round;
+  transition: transform .35s var(--ease);
+}
+.proj__ver:hover { color: var(--ac); border-bottom-color: var(--ac); }
+.proj__ver:hover em { color: var(--ac); }
+.proj__ver:hover svg { transform: translate(3px, -3px); }
 
 /* ---------- pie del proyecto ---------- */
 

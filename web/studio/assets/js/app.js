@@ -32,7 +32,7 @@
 
   var loader = document.getElementById('loader');
   var count = loader.querySelector('.loader__count');
-  var bar = loader.querySelector('.loader__bar');
+  var lock = document.getElementById('loaderLock');
   var archivo = {};
   var listos = 0;
 
@@ -47,7 +47,7 @@
   function pintarProgreso(p) {
     var n = Math.round(p * 100);
     count.textContent = String(n).padStart(3, '0');
-    bar.style.transform = 'scaleX(' + p + ')';
+    if (lock) lock.style.setProperty('--carga', (p * 100).toFixed(1) + '%');
     loader.setAttribute('aria-valuenow', n);
   }
 
