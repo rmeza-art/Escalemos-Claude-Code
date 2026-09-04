@@ -11,12 +11,19 @@ Vercel, Cloudflare Pages, GitHub Pages) subiendo esta carpeta tal cual.
 
 ```
 web/
-├── index.html
-└── assets/
-    ├── css/styles.css
-    ├── js/app.js
-    └── img/            los siete pantallazos de los casos
+├── index.html          versión 1 — el diseño de Claude Design
+├── assets/
+│   ├── css/styles.css
+│   ├── js/app.js
+│   └── img/            los siete pantallazos de los casos + la tarjeta OG
+└── viv/                versión 2 — con el sistema visual de vivmgmt.com
+    ├── index.html
+    ├── README.md
+    └── assets/
 ```
+
+Son **dos versiones del mismo contenido**, para comparar. La de `viv/` reusa las
+imágenes de `assets/img/`; lo demás es propio. Ver `viv/README.md`.
 
 Se eligió estático porque el repo es un proyecto Remotion (video), no una app
 web: agregar React o un bundler aquí solo sumaría build sin ganar nada. El
