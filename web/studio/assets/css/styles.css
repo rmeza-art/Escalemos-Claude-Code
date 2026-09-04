@@ -174,7 +174,37 @@ a { color: inherit; text-decoration: none; }
 }
 .nav__sym img { position: absolute; inset: 0; width: 100%; height: 100%; }
 .nav__sym-base { opacity: .22; }
-.nav__sym-fill { clip-path: inset(calc(100% - var(--avance, 0%)) 0 0 0); }
+
+/* El avance no inunda el símbolo de abajo hacia arriba: trepa por la diagonal
+   que la S ya recorre. La recta y = x + c barre la caja de la esquina inferior
+   izquierda a la superior derecha, con c = 100 - 200·avance. Los cinco vértices
+   colapsan solos en el triángulo o el pentágono que toca en cada tramo. */
+.nav__sym-fill {
+  --e: max(0%, calc((100 - 200 * var(--avance, 0)) * 1%));
+  --d: max(0%, calc((200 * var(--avance, 0) - 100) * 1%));
+  clip-path: polygon(
+    var(--d) var(--e),
+    calc(100% - var(--e)) calc(100% - var(--d)),
+    calc(100% - var(--e)) 100%,
+    0% 100%,
+    0% var(--e)
+  );
+}
+
+/* El destello es el remate de la S, y por dónde entra la diagonal resulta ser
+   lo último que se enciende. Al llegar al final de la página se gana un flash. */
+.nav__sym-flare {
+  position: absolute; left: 94.5%; top: 6.6%;
+  width: 38%; aspect-ratio: 1; translate: -50% -50%;
+  pointer-events: none; opacity: 0; background: var(--ac);
+  clip-path: polygon(50% 0%, 57% 43%, 100% 50%, 57% 57%, 50% 100%, 43% 57%, 0% 50%, 43% 43%);
+}
+.nav__sym.is-full .nav__sym-flare { animation: destello .72s var(--ease) both; }
+@keyframes destello {
+  0%   { opacity: 0; scale: .25; rotate: -35deg; }
+  30%  { opacity: 1; scale: 1; rotate: 0deg; }
+  100% { opacity: 0; scale: 1.5; rotate: 12deg; }
+}
 .nav__links { list-style: none; display: flex; gap: clamp(14px, 2vw, 30px); margin: 0; padding: 0; }
 .nav__links a {
   position: relative; font-size: 12px; font-weight: 700;
@@ -687,4 +717,5 @@ a { color: inherit; text-decoration: none; }
   .hero__scroll i { animation: none; }
   .cursor { display: none; }
   .contact__curtain { display: none; }
+  .nav__sym.is-full .nav__sym-flare { animation: none; opacity: .5; }
 }

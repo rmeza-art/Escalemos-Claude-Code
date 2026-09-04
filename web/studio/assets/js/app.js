@@ -351,7 +351,11 @@
     if (!navSym) return;
     var alto = document.documentElement.scrollHeight - window.innerHeight;
     var p = clamp(window.scrollY / (alto || 1), 0, 1);
-    navSym.style.setProperty('--avance', (p * 100).toFixed(1) + '%');
+    navSym.style.setProperty('--avance', p.toFixed(4));
+    /* Histéresis: el destello se dispara al tocar el final y sólo se rearma
+       si volvés a subir de verdad, no con el temblor de un scroll al borde. */
+    if (p > .995) navSym.classList.add('is-full');
+    else if (p < .96) navSym.classList.remove('is-full');
   }
 
   function pintarNav() {
