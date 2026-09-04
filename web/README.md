@@ -50,6 +50,21 @@ transparente sobre las dos imágenes. Su valor escribe la variable `--p` en el
 contenedor, y de ahí salen los dos `clip-path`, la línea y el tirador. Funciona
 con mouse, touch y teclado (flechas), y lleva `aria-label`.
 
+## Antes de publicar: el dominio
+
+El `<head>` lleva `canonical`, Open Graph, Twitter Card y JSON-LD
+(`ProfessionalService`, con la oferta de $650.000 CLP). Todo eso escribe el
+dominio completo: **`https://escalemos.cl/`**, en siete lugares de
+`index.html`.
+
+Si el sitio queda en otro dominio o en un subdirectorio, hay que reemplazarlo
+en los siete. Un `canonical` apuntando a otra parte saca la página del índice
+de Google.
+
+La tarjeta que se ve al pegar el link es `assets/img/og.jpg` (1200×630). Se
+generó desde el propio sitio; para rehacerla, basta un pantallazo de 1200×630
+con el mismo tratamiento tipográfico.
+
 ## Pendientes de contenido
 
 Vienen así desde el diseño. Hay que reemplazarlos antes de publicar:
