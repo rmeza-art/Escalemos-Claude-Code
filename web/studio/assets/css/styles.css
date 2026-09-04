@@ -701,6 +701,18 @@ a { color: inherit; text-decoration: none; }
 @media (max-width: 760px) {
   .nav__links { gap: 12px; }
   .nav__links a { font-size: 10px; letter-spacing: .08em; }
+}
+
+/* Los cinco enlaces no caben en un teléfono: se salían de la pantalla y
+   Contacto —el que lleva al WhatsApp— quedaba fuera, inalcanzable. En
+   angosto queda sólo ese, que es el único que tiene que estar. El resto
+   del recorrido ya lo da el scroll. */
+@media (max-width: 620px) {
+  .nav__links li:not(:last-child) { display: none; }
+  .nav__links a { font-size: 11px; letter-spacing: .1em; }
+}
+
+@media (max-width: 760px) {
   .about { height: 190svh; }
   .rebuild { max-width: none; }
   .compare, .solo { aspect-ratio: 4 / 3; }
