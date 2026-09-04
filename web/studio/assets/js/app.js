@@ -345,6 +345,15 @@
      papel en el medio. Se marca por posición en vez de mezclar, así el
      símbolo del logo conserva su naranja. */
   var navEl = document.querySelector('.nav');
+  var navSym = document.querySelector('.nav__sym');
+
+  function pintarAvance() {
+    if (!navSym) return;
+    var alto = document.documentElement.scrollHeight - window.innerHeight;
+    var p = clamp(window.scrollY / (alto || 1), 0, 1);
+    navSym.style.setProperty('--avance', (p * 100).toFixed(1) + '%');
+  }
+
   function pintarNav() {
     if (!navEl || !hero) return;
     var y = window.scrollY + 30;
@@ -362,6 +371,7 @@
       pintarCortina();
       pintarVia();
       pintarNav();
+      pintarAvance();
       pendiente = false;
     });
   }

@@ -34,7 +34,10 @@
 
 <nav class="nav" aria-label="Principal">
   <a class="nav__mark" href="#top">
-    <img class="nav__sym" src="../assets/img/escalemos-simbolo.png" alt="" width="218" height="175" aria-hidden="true">
+    <span class="nav__sym" aria-hidden="true">
+      <img class="nav__sym-base" src="../assets/img/escalemos-simbolo.png" alt="">
+      <img class="nav__sym-fill" src="../assets/img/escalemos-simbolo.png" alt="">
+    </span>
     <span>Escalemos</span>
   </a>
   <ul class="nav__links">
@@ -286,7 +289,7 @@
   <div class="contact__sticky">
     <div class="contact__curtain" aria-hidden="true"></div>
     <header class="contact__head"><span class="idx" aria-hidden="true">05</span><span>Contacto</span></header>
-    <div class="contact__body">
+    <div class="contact__body" data-entered="false">
       <p class="contact__eyebrow">Media hora, sin costo.</p>
       <h2 id="contacto-h" aria-label="Partamos mirando tu tienda.">
         <span class="line" aria-hidden="true"><span>Partamos mirando</span></span>

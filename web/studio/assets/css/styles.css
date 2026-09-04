@@ -168,7 +168,13 @@ a { color: inherit; text-decoration: none; }
   font-variation-settings: 'wdth' 118; font-weight: 800;
   font-size: 15px; letter-spacing: -.015em; text-transform: uppercase;
 }
-.nav__sym { height: 19px; width: auto; flex: 0 0 auto; }
+.nav__sym {
+  position: relative; display: inline-block;
+  height: 19px; width: auto; aspect-ratio: 218 / 175; flex: 0 0 auto;
+}
+.nav__sym img { position: absolute; inset: 0; width: 100%; height: 100%; }
+.nav__sym-base { opacity: .22; }
+.nav__sym-fill { clip-path: inset(calc(100% - var(--avance, 0%)) 0 0 0); }
 .nav__links { list-style: none; display: flex; gap: clamp(14px, 2vw, 30px); margin: 0; padding: 0; }
 .nav__links a {
   position: relative; font-size: 12px; font-weight: 700;
@@ -214,7 +220,7 @@ a { color: inherit; text-decoration: none; }
   transition: transform 1.1s var(--ease) .15s, opacity .8s var(--ease) .15s;
 }
 .is-ready .lockup__sym { transform: none; opacity: 1; }
-.hero__h:hover .lockup__sym { transform: translateY(-7%) rotate(5deg) scale(1.06); transition-delay: 0s; }
+
 .lockup__word { flex: 1 1 auto; min-width: 0; }
 .mark {
   display: inline-block;
@@ -596,10 +602,14 @@ a { color: inherit; text-decoration: none; }
   display: flex; flex-direction: column; justify-content: space-between;
   padding: clamp(80px, 9vw, 120px) var(--gut) clamp(24px, 3vw, 40px);
 }
+/* La cortina entra tapando —en el mismo papel del cuerpo— y se levanta
+   con el scroll para descubrir el cierre oscuro. Va por encima del
+   contenido: si va por debajo, al final deja texto blanco sobre blanco. */
 .contact__curtain {
   position: absolute; inset: 0; background: var(--paper);
-  transform: translateY(calc(100% - var(--cp, 0) * 100%));
+  transform: translateY(calc(var(--cp, 0) * -100%));
   will-change: transform;
+  z-index: 3;
 }
 .contact__sticky > *:not(.contact__curtain) { position: relative; z-index: 2; }
 
