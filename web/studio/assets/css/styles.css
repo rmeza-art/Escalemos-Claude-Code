@@ -106,44 +106,46 @@ a { color: inherit; text-decoration: none; }
 }
 /* La apertura es el logo original, entero y centrado, encendiéndose de
    izquierda a derecha con la carga real: el logo ES la barra de progreso,
-   así que no hace falta ninguna. Se dibuja con el mismo PNG recortado por
-   el hueco vertical vacío que hay entre isotipo y palabra (columnas
-   217-224 de 965), sin redibujar nada. Al terminar, la palabra se recoge
-   y sólo el isotipo viaja a su lugar en el nav, donde sigue midiendo el
-   avance de la página. */
+   así que no hace falta ninguna.
+
+   El SVG que entregó Ricardo es híbrido: la palabra es vector de verdad
+   (nueve trazados, uno por letra) pero el isotipo va dentro como un PNG de
+   240×201 pasado por una máscara. Así que la palabra sale del SVG —nítida a
+   cualquier tamaño, y 11 KB contra 121— y el isotipo sigue siendo el PNG que
+   ya usan el nav, el hero y el riel del proceso, que es además el mismo
+   archivo al que vuela.
+
+   Las proporciones salen de la caja de tinta del propio SVG (690×137), donde
+   isotipo y palabra se solapan: el logo es así, no es un error de recorte. */
 .loader__lock {
   position: relative;
-  width: min(74vw, 620px); aspect-ratio: 965 / 175;
+  width: min(74vw, 620px); aspect-ratio: 690 / 137;
 }
-.loader__base, .loader__cap { position: absolute; inset: 0; }
-.loader__base {
-  background: url(../../../assets/img/escalemos-logo.png) center / contain no-repeat;
-  opacity: .17;
-  transition: opacity .5s var(--ease);
-}
-.loader__cap {
+.loader__cap { position: absolute; inset: 0; }
+.loader__cap--apagada { opacity: .17; transition: opacity .5s var(--ease); }
+.loader__cap--viva {
   clip-path: inset(0 calc(100% - var(--carga, 0%)) 0 0);
   transition: clip-path .5s var(--ease);
 }
 .loader__sym, .loader__word {
-  position: absolute; top: 0; height: 100%;
-  background-image: url(../../../assets/img/escalemos-logo.png);
-  background-repeat: no-repeat;
-  background-size: auto 100%;
+  position: absolute;
+  background-repeat: no-repeat; background-position: left top; background-size: contain;
 }
 .loader__sym {
-  left: 0; aspect-ratio: 218 / 175; background-position: left center;
+  left: 0; top: 0; width: 24.71%; aspect-ratio: 218 / 175;
+  background-image: url(../../../assets/img/escalemos-simbolo.png);
   transform-origin: top left;
   transition: transform 1s var(--ease);
 }
 .loader__word {
-  left: 23.316%; aspect-ratio: 740 / 175; background-position: right center;
+  left: 21.667%; top: 38.32%; width: 78.33%; aspect-ratio: 540 / 84;
+  background-image: url(../../../assets/img/escalemos-palabra.svg);
   transition: opacity .45s var(--ease), transform .7s var(--ease);
 }
-.loader.is-done .loader__base { opacity: 0; }
+.loader.is-done .loader__cap--apagada { opacity: 0; }
 .loader.is-done .loader__word { opacity: 0; transform: translateX(-10px); }
 /* el recorte se suelta para que el isotipo pueda salir de la caja al volar */
-.loader.is-done .loader__cap { clip-path: none; }
+.loader.is-done .loader__cap--viva { clip-path: none; }
 /* la carga no se va hacia arriba: se apaga el fondo y el símbolo viaja
    hasta su lugar en el nav, así no aparece y desaparece */
 .loader { transition: background-color .9s var(--ease), opacity .9s var(--ease); }

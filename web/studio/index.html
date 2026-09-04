@@ -19,8 +19,11 @@
 <!-- ============================ CARGA ============================ -->
 <div class="loader" id="loader" role="progressbar" aria-label="Cargando" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
   <span class="loader__lock" id="loaderLock" style="--carga:0%">
-    <span class="loader__base" aria-hidden="true"></span>
-    <span class="loader__cap" role="img" aria-label="Escalemos">
+    <span class="loader__cap loader__cap--apagada" aria-hidden="true">
+      <span class="loader__sym"></span>
+      <span class="loader__word"></span>
+    </span>
+    <span class="loader__cap loader__cap--viva" role="img" aria-label="Escalemos">
       <span class="loader__sym" id="loaderSym"></span>
       <span class="loader__word"></span>
     </span>
